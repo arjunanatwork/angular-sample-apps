@@ -5,9 +5,18 @@ import { AppComponent } from "./app.component";
 
 import { HeaderComponent } from "./header/header.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { MainComponent } from "./main/main.component";
+
+import { BoardListComponent } from "./main/boards/board-list/board-list.component";
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, SidebarComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    SidebarComponent,
+    MainComponent,
+    BoardListComponent
+  ],
   imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent]
