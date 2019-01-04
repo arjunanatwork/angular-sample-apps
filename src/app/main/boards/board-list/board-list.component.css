@@ -2,3 +2,19 @@ img.brand {
   width: 65px;
   height: 65px;
 }
+
+.card {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    cursor: pointer;
+    -webkit-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    -webkit-transition: 200ms ease-in-out;
+    transition: 200ms ease-in-out;
+    -webkit-transform: scale(1.10);
+    -ms-transform: scale(1.10);
+    transform: scale(1.10);
+}

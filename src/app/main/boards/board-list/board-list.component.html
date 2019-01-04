@@ -9,16 +9,50 @@
 </nav>
 <div class="columns">
   <div class="column is-full">
-    <div class="columns">
-      
-			<div class="column is-one-third">
-        <div class="card">
+    <div class="columns is-multiline">
+      <div class="column is-one-third">
+
+        <div class="card" (click)="showCreateBoard=!showCreateBoard" *ngIf="!showCreateBoard">
           <div class="card-content">
             <div class="content">Create a board</div>
           </div>
         </div>
+
+        <div class="card"  *ngIf="showCreateBoard">
+			      <header class="card-header">
+                <p class="card-header-title">
+                  Creating a Board
+                </p>
+                <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon" (click)="showCreateBoard=!showCreateBoard">
+                      <i class="fas fa-times" aria-hidden="true"></i>
+                  </span>
+                </a>
+		    	  </header>
+            <div class="card-content">
+                <div class="content">
+                  What shall we call the board?
+				          <input class="input" type="text" placeholder="Text input" #boardName>
+                </div>
+              </div>
+            <footer class="card-footer">
+                <a href="#" class="card-footer-item">Cancel</a>
+                <a href="#" class="card-footer-item" (click)="createBoard()">Create</a>
+            </footer>
+        </div>
+        
       </div>
-			
+
+      <ng-template [ngIf]="boardList?.length > 0">
+        <div class="column is-one-third" *ngFor="let board of boardList">
+            <div class="card" >
+              <div class="card-content">
+                <div class="content">{{board.name}}</div>
+              </div>
+            </div>
+        </div>
+      </ng-template>
+
     </div>
   </div>
 </div>
