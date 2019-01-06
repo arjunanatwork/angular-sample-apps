@@ -27,8 +27,8 @@
                 </div>
               </div>
             <footer class="card-footer">
-                <a href="#" class="card-footer-item" (click)="showCreateBoard=!showCreateBoard">Cancel</a>
-                <a href="#" class="card-footer-item" (click)="createBoard()">Create</a>
+                <a [routerLink]="" class="card-footer-item" (click)="showCreateBoard=!showCreateBoard">Cancel</a>
+                <a [routerLink]="" class="card-footer-item" (click)="createBoard();showCreateBoard=!showCreateBoard">Create</a>
             </footer>
         </div>
         
@@ -36,7 +36,7 @@
 
       <ng-template [ngIf]="boardList?.length > 0">
         <div class="column is-one-third" *ngFor="let board of boardList">
-            <div class="card" >
+            <div class="card" (click)="onBoardSelect(board)">
               <div class="card-content">
                 <div class="content">{{board.name}}</div>
               </div>
