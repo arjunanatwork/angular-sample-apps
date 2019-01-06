@@ -8,6 +8,10 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { MainComponent } from "./main/main.component";
 
 import { BoardListComponent } from "./main/boards/board-list/board-list.component";
+import { BoardMainComponent } from "./main/boards/board-main/board-main.component";
+
+import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hackernews-main.component";
+
 
 @NgModule({
   declarations: [
@@ -15,7 +19,9 @@ import { BoardListComponent } from "./main/boards/board-list/board-list.componen
     HeaderComponent,
     SidebarComponent,
     MainComponent,
-    BoardListComponent
+    BoardMainComponent,
+    BoardListComponent,
+    HackerNewsMainComponent
   ],
   imports: [BrowserModule],
   providers: [],
