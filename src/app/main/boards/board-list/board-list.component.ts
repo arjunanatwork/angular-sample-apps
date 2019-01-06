@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, Output, EventEmitter } from "@angular/core";
 import { Board } from "../shared/board.model";
 
 @Component({
@@ -14,7 +14,8 @@ export class BoardListComponent {
   @ViewChild("boardName") boardName: ElementRef;
 
   createBoard(){
-    this.boardList.push(new Board(this.boardName.nativeElement.value));
+    this.boardList.push(new Board(Math.floor(Math.random() * 1000) + 1, this.boardName.nativeElement.value));
     console.log(this.boardList)
   }
+
 }
