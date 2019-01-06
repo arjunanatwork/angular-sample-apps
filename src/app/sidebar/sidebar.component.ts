@@ -7,10 +7,4 @@ import { Component, EventEmitter, Output, Input } from "@angular/core";
 })
 export class SidebarComponent {
 
-  @Output() appSelected = new EventEmitter<string>();
-  @Input()  highlightSelectedApp: string;
-
-  onAppSelect(name:string){
-    this.appSelected.emit(name);
-  }
 }

@@ -7,9 +7,4 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
 
-  appSelected = "trello";
-
-  onNavigate(app: string) {
-    this.appSelected = app;
-  }
 }

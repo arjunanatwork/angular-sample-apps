@@ -1,9 +1,13 @@
 <app-header></app-header>
 <section class="section">
-  <div class="container">
-    <div class="columns">
-      <div class="column is-one-fifth"><app-sidebar (appSelected)="onNavigate($event)" [highlightSelectedApp]="appSelected"></app-sidebar></div>
-      <div class="column"><app-main [selectedApp]="appSelected"></app-main></div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="columns">
+			<div class="column is-one-fifth">
+				<app-sidebar></app-sidebar>
+			</div>
+			<div class="column">
+		    <app-main></app-main>
+			</div>
+		</div>
+	</div>
 </section>

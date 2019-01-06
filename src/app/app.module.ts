@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from "./app.component";
 
@@ -12,6 +13,11 @@ import { BoardMainComponent } from "./main/boards/board-main/board-main.componen
 
 import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hackernews-main.component";
 
+const routes: Routes = [
+  { path: '', component: MainComponent, pathMatch: 'full'},
+  { path: 'trello-clone', component: BoardMainComponent },
+  { path: 'hackernews', component: HackerNewsMainComponent }
+];
 
 @NgModule({
   declarations: [
@@ -23,7 +29,7 @@ import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hacke
     BoardListComponent,
     HackerNewsMainComponent
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent]
 })
