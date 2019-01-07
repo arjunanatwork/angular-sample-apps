@@ -1,7 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 
 import { Board } from "../board-shared/board.model";
+import { List } from "../board-shared/list.model";
+import { Card } from "../board-shared/card.model";
+
 import { BoardItemService } from "../board-services/board-item.service";
 
 @Component({
@@ -11,7 +14,11 @@ import { BoardItemService } from "../board-services/board-item.service";
   styleUrls: ["./board-item.component.css"]
 })
 export class BoardItemComponent implements OnInit {
+  showCreateList = false;
   board: Board;
+  listItems = []
+
+  @ViewChild("listName") listName: ElementRef;
 
   constructor(private route: ActivatedRoute,private boardItemService: BoardItemService) {}
 
@@ -19,6 +26,17 @@ export class BoardItemComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get("id");
     console.log(id);
     this.board = this.boardItemService.getBoardInfo(id);
+  }
+
+  createList() {
+    let list = new List(
+      Math.floor(Math.random() * 1000) + 1,
+      this.listName.nativeElement.value,
+      [],
+      this.board.id
+    );
+    this.listItems.push(list);
+    console.log(this.listItems);
   }
 
   ngOnInit(): void {
