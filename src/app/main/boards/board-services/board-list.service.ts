@@ -1,7 +1,7 @@
 import { Inject, Injectabe } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { Board } from '../shared/board.model'
+import { Board } from '../board-shared/board.model'
 
 const STORAGE_KEY = 'boards';
 @Injectabe

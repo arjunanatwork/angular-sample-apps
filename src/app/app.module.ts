@@ -19,8 +19,10 @@ import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hacke
 
 const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full'},
-  { path: 'trello-clone', component: BoardMainComponent },
-  { path: 'trello-clone/board/:id', component: BoardItemComponent },
+  { path: 'trello-clone', component: BoardMainComponent, children:[
+    { path: '', component: BoardListComponent},
+    { path: 'board/:id', component: BoardItemComponent }
+  ] },
   { path: 'hackernews', component: HackerNewsMainComponent }
 ];
 
