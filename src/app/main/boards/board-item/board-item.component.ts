@@ -16,11 +16,14 @@ import { BoardItemService } from "../board-services/board-item.service";
 export class BoardItemComponent implements OnInit {
   showCreateList = false;
   board: Board;
-  listItems = []
+  listItems = [];
 
   @ViewChild("listName") listName: ElementRef;
 
-  constructor(private route: ActivatedRoute,private boardItemService: BoardItemService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private boardItemService: BoardItemService
+  ) {}
 
   getBoardInfo(): void {
     const id = +this.route.snapshot.paramMap.get("id");

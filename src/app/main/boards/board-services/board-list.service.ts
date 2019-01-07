@@ -1,27 +1,26 @@
-import { Inject, Injectabe } from '@angular/core';
-import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { Inject, Injectable } from "@angular/core";
+import { SESSION_STORAGE, StorageService } from "angular-webstorage-service";
 
-import { Board } from '../board-shared/board.model'
+import { Board } from "../board-shared/board.model";
 
-const STORAGE_KEY = 'boards';
-@Injectabe
+const STORAGE_KEY = "boards";
+
+@Injectable()
 export class BoardListService {
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
 
-constructor(@Inject(SESSION_STORAGE) private storage:StorageService){}
+  public saveBoard(board: Board) {
+    //get array of tasks from local storage
+    const currentBoardList = this.storage.get(STORAGE_KEY) || [];
+    // push new task to array
+    currentBoardList.push(board);
+    // insert updated array to local storage
+    this.storage.set(STORAGE_KEY, currentBoardList);
 
-public saveBoard(board:Board) {
-  //get array of tasks from local storage
-  const currentBoardList = this.storage.get(STORAGE_KEY) || [];
-  // push new task to array
-  currentBoardList.push(board);
-  // insert updated array to local storage
-  this.storage.set(STORAGE_KEY, currentBoardList);
-  
-  console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
-}
+    console.log(this.storage.get(STORAGE_KEY) || "LocaL storage is empty");
+  }
 
-public getBoards() {
-  return this.storage.get(STORAGE_KEY);
-}
-
+  public getBoards() {
+    return this.storage.get(STORAGE_KEY);
+  }
 }
