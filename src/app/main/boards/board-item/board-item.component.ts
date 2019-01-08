@@ -25,8 +25,10 @@ export class BoardItemComponent implements OnInit {
   ) {}
 
   getBoardInfo(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
-    this.board = this.boardItemService.getBoardInfo(id);
+    const id = this.route.snapshot.paramMap.get("id");
+    this.boardItemService.getBoardInfo(id).then(value => {
+      this.board = value;
+    });
   }
 
   createList() {
@@ -36,9 +38,10 @@ export class BoardItemComponent implements OnInit {
       [],
       this.board.id
     );
-    this.listItems = this.listItems || [];
-    this.listItems.push(list);
-    this.boardItemService.saveList(list);
+    //this.listItems = this.listItems || [];
+    //this.listItems.push(list);
+    this.board.list.push(list);
+    this.boardItemService.saveList(this.board);
     console.log(this.listItems);
   }
 

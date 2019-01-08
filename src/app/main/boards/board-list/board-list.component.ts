@@ -39,7 +39,29 @@ export class BoardListComponent implements OnInit {
     this.router.navigate(["board", board.id], { relativeTo: this.route });
   }
 
+  getBoardData() {
+    return this.boardListService.getBoardKeys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          return this.boardListService
+            .getBoardItem(key)
+            .then(value => {
+              return { [key]: value };
+            })
+            .then(arr => {
+              return Object.assign(arr);
+            });
+        })
+      );
+    });
+  }
+
   ngOnInit() {
-    this.boardList = this.boardListService.getBoards();
+    this.getBoardData().then(val => {
+      val.forEach(v => {
+        let key = Object.keys(v)[0];
+        this.boardList.push(v[key]);
+      });
+    });
   }
 }
