@@ -26,7 +26,8 @@ export class BoardListComponent implements OnInit {
   createBoard() {
     let board = new Board(
       Math.floor(Math.random() * 1000) + 1,
-      this.boardName.nativeElement.value
+      this.boardName.nativeElement.value,
+      []
     );
     this.boardList = this.boardList || [];
     this.boardList.push(board);

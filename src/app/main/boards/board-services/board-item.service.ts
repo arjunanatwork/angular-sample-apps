@@ -1,8 +1,11 @@
 import { Inject, Injectable } from "@angular/core";
 import { SESSION_STORAGE, StorageService } from "angular-webstorage-service";
 
+import { List } from "../board-shared/list.model";
+
 const STORAGE_KEY = "boards";
 const ACTIVE_BOARD_KEY = "activeboard";
+const ACTIVE_BOARD_LIST_KEY = "activeboardList";
 
 @Injectable()
 export class BoardItemService {
@@ -19,5 +22,12 @@ export class BoardItemService {
 
     this.storage.set(ACTIVE_BOARD_KEY, activeBoard);
     return activeBoard;
+  }
+
+  public saveList(list: List) {
+    let board = this.storage
+      .get(STORAGE_KEY)
+      .find(board => board.id === list.boardId);
+    board.list.push(list);
   }
 }

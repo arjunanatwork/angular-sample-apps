@@ -3,7 +3,6 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Board } from "../board-shared/board.model";
 import { List } from "../board-shared/list.model";
-import { Card } from "../board-shared/card.model";
 
 import { BoardItemService } from "../board-services/board-item.service";
 
@@ -16,7 +15,7 @@ import { BoardItemService } from "../board-services/board-item.service";
 export class BoardItemComponent implements OnInit {
   showCreateList = false;
   board: Board;
-  listItems = [];
+  listItems: List[] = [];
 
   @ViewChild("listName") listName: ElementRef;
 
@@ -27,7 +26,6 @@ export class BoardItemComponent implements OnInit {
 
   getBoardInfo(): void {
     const id = +this.route.snapshot.paramMap.get("id");
-    console.log(id);
     this.board = this.boardItemService.getBoardInfo(id);
   }
 
@@ -38,7 +36,9 @@ export class BoardItemComponent implements OnInit {
       [],
       this.board.id
     );
+    this.listItems = this.listItems || [];
     this.listItems.push(list);
+    this.boardItemService.saveList(list);
     console.log(this.listItems);
   }
 
