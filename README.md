@@ -1,3 +1,6 @@
+[![Dependency Status](https://img.shields.io/david/arjunanatwork/angular-sample-apps.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps)
+[![devDependency Status](https://img.shields.io/david/dev/arjunanatwork/angular-sample-apps.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps#info=devDependencies)
+
 # Angular Sample Apps
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
