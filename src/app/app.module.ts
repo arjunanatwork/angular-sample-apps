@@ -3,6 +3,8 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { NgForageConfig, Driver } from "ngforage";
 
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
 import { AppComponent } from "./app.component";
 
 import { HeaderComponent } from "./header/header.component";
@@ -39,7 +41,7 @@ const routes: Routes = [
     BoardItemComponent,
     HackerNewsMainComponent
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(routes), DragDropModule],
   providers: [],
   bootstrap: [AppComponent]
 })

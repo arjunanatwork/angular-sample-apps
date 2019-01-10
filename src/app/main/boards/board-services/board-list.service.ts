@@ -2,14 +2,13 @@ import { Injectable } from "@angular/core";
 import { NgForage } from "ngforage";
 
 import { Board } from "../board-shared/board.model";
-
-const STORAGE_KEY = "boards";
+import { GlobalVariable } from "../../../shared/constants/global";
 
 @Injectable()
 export class BoardListService {
   constructor(private readonly ngf: NgForage) {
-    this.ngf.name = "trello-clone";
-    this.ngf.storeName = "boardCollection";
+    this.ngf.name = GlobalVariable.TRELLOCLONE_DB_NAME;
+    this.ngf.storeName = GlobalVariable.TRELLOCLONE_DB_STORE_NAME;
   }
 
   public saveBoard(board: Board) {
