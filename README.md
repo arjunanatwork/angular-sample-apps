@@ -1,5 +1,5 @@
-[![Dependency Status](https://img.shields.io/david/arjunanatwork/angular-sample-apps.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps)
-[![devDependency Status](https://img.shields.io/david/dev/arjunanatwork/angular-sample-apps.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps#info=devDependencies)
+[![Dependency Status](https://img.shields.io/david/arjunanatwork/angular-sample-apps/local-dev.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps/local-dev)
+[![devDependency Status](https://img.shields.io/david/dev/arjunanatwork/angular-sample-apps/local-dev.svg)](https://david-dm.org/arjunanatwork/angular-sample-apps/local-dev#info=devDependencies)
 [![Known Vulnerabilities](https://snyk.io/test/github/arjunanatwork/angular-sample-apps/badge.svg?targetFile=package.json)](https://snyk.io/test/github/arjunanatwork/angular-sample-apps?targetFile=package.json)
 
 # Angular Sample Apps
