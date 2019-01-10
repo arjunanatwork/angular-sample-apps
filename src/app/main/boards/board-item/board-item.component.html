@@ -2,7 +2,7 @@
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-third">
-        <div class="card has-text-white-bis has-background-primary">
+        <div class="card has-text-white-bis has-background-primary app-card">
           <div class="card-content">
             <div class="content">{{board?.name}}</div>
           </div>
@@ -23,11 +23,9 @@
             </header>
             <div class="card-content">
               <div class="content">
-                <input class="input" type="text" placeholder="Text input">
-                <div class="card" *ngFor="let card of list.cards">
-                  <div class="card-content">
-                    <div class="content">card nameee</div>
-                  </div>
+                <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id)">
+                <div class="app-card-content" *ngFor="let card of list.cards">
+                  {{card.name}}
                 </div>
               </div>
             </div>

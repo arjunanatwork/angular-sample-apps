@@ -1,0 +1,28 @@
+.app-card {
+    border-radius: 4.5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 6px 6px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    opacity: 1;
+}
+
+.app-card-content {
+    opacity: 1;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 6px 6px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    text-decoration: none;
+    background-color: rgb(202, 255, 222);
+    margin: 10px 0;
+    padding: 14px 7px;
+    border-radius: 4.5px;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    cursor: grab;
+    -webkit-animation: eMLfYp 300ms linear;
+    animation: eMLfYp 300ms linear;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: space-around;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: space-around;
+    justify-content: space-around;
+}

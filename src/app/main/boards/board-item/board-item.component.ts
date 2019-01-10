@@ -5,6 +5,7 @@ import { Board } from "../board-shared/board.model";
 import { List } from "../board-shared/list.model";
 
 import { BoardItemService } from "../board-services/board-item.service";
+import { Card } from "../board-shared/card.model";
 
 @Component({
   selector: "board-item",
@@ -38,11 +39,15 @@ export class BoardItemComponent implements OnInit {
       [],
       this.board.id
     );
-    //this.listItems = this.listItems || [];
-    //this.listItems.push(list);
     this.board.list.push(list);
-    this.boardItemService.saveList(this.board);
-    console.log(this.listItems);
+    this.boardItemService.saveBoard(this.board);
+  }
+
+  createCard(value: string, listId: number) {
+    console.log(value);
+    let card = new Card(Math.floor(Math.random() * 1000) + 1, value, false);
+    this.board.list.find(x => x.id == listId).cards.push(card);
+    this.boardItemService.saveBoard(this.board);
   }
 
   ngOnInit(): void {

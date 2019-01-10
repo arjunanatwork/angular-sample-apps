@@ -15,7 +15,7 @@ export class BoardItemService {
     return this.ngf.getItem(id);
   }
 
-  public saveList(board: Board) {
+  public saveBoard(board: Board) {
     this.ngf.setItem(String(board.id), board);
   }
 }
