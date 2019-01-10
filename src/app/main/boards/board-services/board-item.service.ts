@@ -1,24 +1,21 @@
-import { Inject, Injectabe } from "@angular/core";
-import { SESSION_STORAGE, StorageService } from "angular-webstorage-service";
+import { Injectable } from "@angular/core";
+import { NgForage } from "ngforage";
 
+import { List } from "../board-shared/list.model";
 import { Board } from "../board-shared/board.model";
 
-const STORAGE_KEY = "boards";
-const ACTIVE_BOARD_KEY = "activeboard";
-@Injectabe
+@Injectable()
 export class BoardItemService {
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
+  constructor(private readonly ngf: NgForage) {
+    this.ngf.name = "trello-clone";
+    this.ngf.storeName = "boardCollection";
+  }
 
-  public getBoardInfo(id: number) {
-    let boards = this.storage.get(STORAGE_KEY);
-    let activeBoard = boards.find(board => board.id === id);
+  public getBoardInfo(id: string): Promise<Board> {
+    return this.ngf.getItem(id);
+  }
 
-    let isActiveBoardPresent = this.storage.get(ACTIVE_BOARD_KEY);
-    if (isActiveBoardPresent != undefined || isActiveBoardPresent != null) {
-      this.storage.set(ACTIVE_BOARD_KEY, null);
-    } 
-    
-    this.storage.set(ACTIVE_BOARD_KEY, activeBoard);
-    return activeBoard;
+  public saveBoard(board: Board) {
+    this.ngf.setItem(String(board.id), board);
   }
 }

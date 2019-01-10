@@ -16,16 +16,20 @@ import { BoardItemService } from "../board-services/board-item.service";
 export class BoardItemComponent implements OnInit {
   showCreateList = false;
   board: Board;
-  listItems = []
+  listItems: List[] = [];
 
   @ViewChild("listName") listName: ElementRef;
 
-  constructor(private route: ActivatedRoute,private boardItemService: BoardItemService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private boardItemService: BoardItemService
+  ) {}
 
   getBoardInfo(): void {
-    const id = +this.route.snapshot.paramMap.get("id");
-    console.log(id);
-    this.board = this.boardItemService.getBoardInfo(id);
+    const id = this.route.snapshot.paramMap.get("id");
+    this.boardItemService.getBoardInfo(id).then(value => {
+      this.board = value;
+    });
   }
 
   createList() {
@@ -35,7 +39,19 @@ export class BoardItemComponent implements OnInit {
       [],
       this.board.id
     );
-    this.listItems.push(list);
+    this.board.list.push(list);
+    this.boardItemService.saveBoard(this.board);
+    console.log(this.listItems);
+  }
+
+  createCard(value:string, listId: number) {
+    let card = new Card(
+      Math.floor(Math.random() * 1000) + 1,
+      value,
+      false
+    )
+    this.board.list.find(x=> x.id === listId).cards.push(card)
+    this.boardItemService.saveBoard(this.board);
     console.log(this.listItems);
   }
 

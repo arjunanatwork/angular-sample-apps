@@ -1,8 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from '@angular/router';
-import { StorageServiceModule } from "angular-webstorage-service"
-
+import { RouterModule, Routes } from "@angular/router";
+import { NgForageConfig, Driver } from "ngforage";
 
 import { AppComponent } from "./app.component";
 
@@ -14,16 +13,19 @@ import { BoardListComponent } from "./main/boards/board-list/board-list.componen
 import { BoardMainComponent } from "./main/boards/board-main/board-main.component";
 import { BoardItemComponent } from "./main/boards/board-item/board-item.component";
 
-
 import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hackernews-main.component";
 
 const routes: Routes = [
-  { path: '', component: MainComponent, pathMatch: 'full'},
-  { path: 'trello-clone', component: BoardMainComponent, children:[
-    { path: '', component: BoardListComponent},
-    { path: 'board/:id', component: BoardItemComponent }
-  ] },
-  { path: 'hackernews', component: HackerNewsMainComponent }
+  { path: "", component: MainComponent, pathMatch: "full" },
+  {
+    path: "trello-clone",
+    component: BoardMainComponent,
+    children: [
+      { path: "", component: BoardListComponent },
+      { path: "board/:id", component: BoardItemComponent }
+    ]
+  },
+  { path: "hackernews", component: HackerNewsMainComponent }
 ];
 
 @NgModule({
@@ -37,8 +39,19 @@ const routes: Routes = [
     BoardItemComponent,
     HackerNewsMainComponent
   ],
-  imports: [BrowserModule, StorageServiceModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  public constructor(ngfConfig: NgForageConfig) {
+    ngfConfig.configure({
+      name: "Angular-Sample-Apps",
+      driver: [
+        // defaults to indexedDB -> webSQL -> localStorage
+        Driver.INDEXED_DB,
+        Driver.LOCAL_STORAGE
+      ]
+    });
+  }
+}
