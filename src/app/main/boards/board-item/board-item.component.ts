@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { Board } from "../board-shared/board.model";
 import { List } from "../board-shared/list.model";
@@ -53,6 +54,18 @@ export class BoardItemComponent implements OnInit {
     this.board.list.find(x=> x.id === listId).cards.push(card)
     this.boardItemService.saveBoard(this.board);
     console.log(this.listItems);
+  }
+
+  drop(event: CdkDragDrop<string[]>, listId:number) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+    this.boardItemService.saveBoard(this.board);
   }
 
   ngOnInit(): void {
