@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 import { Board } from "../board-shared/board.model";
 import { BoardListService } from "../board-services/board-list.service";
@@ -20,6 +21,7 @@ export class BoardListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private toastr: ToastrService,
     private boardListService: BoardListService
   ) {}
 
@@ -32,11 +34,16 @@ export class BoardListComponent implements OnInit {
     this.boardList = this.boardList || [];
     this.boardList.push(board);
     this.boardListService.saveBoard(board);
-    console.log(this.boardList);
+    this.toastr.success("Board " + board.name + " has been created", "", {
+      toastClass: "toast has-background-success	"
+    });
   }
 
   deleteBoard(boardId: number) {
     this.boardListService.deleteBoard(boardId);
+    this.toastr.info("Board has been deleted", "", {
+      toastClass: "toast has-background-info"
+    });
     this.getBoardData();
   }
 

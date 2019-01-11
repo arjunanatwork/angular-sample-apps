@@ -5,6 +5,7 @@ import {
   moveItemInArray,
   transferArrayItem
 } from "@angular/cdk/drag-drop";
+import { ToastrService } from "ngx-toastr";
 
 import { Board } from "../board-shared/board.model";
 import { List } from "../board-shared/list.model";
@@ -27,7 +28,8 @@ export class BoardItemComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private boardItemService: BoardItemService
+    private boardItemService: BoardItemService,
+    private toastr: ToastrService
   ) {}
 
   getBoardInfo(): void {
@@ -46,6 +48,9 @@ export class BoardItemComponent implements OnInit {
     );
     this.board.list.push(list);
     this.boardItemService.saveBoard(this.board);
+    this.toastr.success("List " + list.name + " has been created", "", {
+      toastClass: "toast has-background-success	"
+    });
   }
 
   createCard(value: string, listId: number) {
@@ -53,12 +58,18 @@ export class BoardItemComponent implements OnInit {
     let card = new Card(Math.floor(Math.random() * 1000) + 1, value, false);
     this.board.list.find(x => x.id == listId).cards.push(card);
     this.boardItemService.saveBoard(this.board);
+    this.toastr.success("Card " + card.name + " has been created", "", {
+      toastClass: "toast has-background-success	"
+    });
   }
 
   deleteList(listId: number) {
     let listIndex = this.board.list.findIndex(i => i.id === listId);
     this.board.list.splice(listIndex, 1);
     this.boardItemService.saveBoard(this.board);
+    this.toastr.info("List has been deleted", "", {
+      toastClass: "toast has-background-info"
+    });
   }
 
   deleteCard(cardId: number, listId: number) {
@@ -67,6 +78,9 @@ export class BoardItemComponent implements OnInit {
       .cards.findIndex(i => i.id === cardId);
     this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
     this.boardItemService.saveBoard(this.board);
+    this.toastr.info("Card has been deleted", "", {
+      toastClass: "toast has-background-info"
+    });
   }
 
   drop(event: CdkDragDrop<string[]>, listId: number) {

@@ -1,9 +1,11 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { NgForageConfig, Driver } from "ngforage";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { NgForageConfig, Driver } from "ngforage";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppComponent } from "./app.component";
 
@@ -41,7 +43,17 @@ const routes: Routes = [
     BoardItemComponent,
     HackerNewsMainComponent
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), DragDropModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: "toast-bottom-center",
+      preventDuplicates: true
+    }),
+    DragDropModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
