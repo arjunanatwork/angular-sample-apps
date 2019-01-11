@@ -33,7 +33,7 @@
     margin: unset !important;
 }
 
-.app-card-delete {
+.app-card-options {
     float: right;
     cursor: pointer;
 }

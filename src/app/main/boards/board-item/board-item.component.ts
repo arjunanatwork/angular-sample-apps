@@ -63,6 +63,18 @@ export class BoardItemComponent implements OnInit {
     });
   }
 
+  cardAction(cardId: number, listId: number, isCompleted: boolean) {
+    this.board.list
+      .find(x => x.id === listId)
+      .cards.find(i => i.id === cardId).isCompleted = isCompleted;
+    this.boardItemService.saveBoard(this.board);
+    if (isCompleted) {
+      this.toastr.info("Card has been marked as completed", "", {
+        toastClass: "toast has-background-info"
+      });
+    }
+  }
+
   deleteList(listId: number) {
     let listIndex = this.board.list.findIndex(i => i.id === listId);
     this.board.list.splice(listIndex, 1);
