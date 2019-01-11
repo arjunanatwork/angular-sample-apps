@@ -55,6 +55,12 @@ export class BoardItemComponent implements OnInit {
     this.boardItemService.saveBoard(this.board);
   }
 
+  deleteList(listId: number) {
+    let listIndex = this.board.list.findIndex(i => i.id === listId);
+    this.board.list.splice(listIndex, 1);
+    this.boardItemService.saveBoard(this.board);
+  }
+
   deleteCard(cardId: number, listId: number) {
     let cardIndex = this.board.list
       .find(x => x.id === listId)

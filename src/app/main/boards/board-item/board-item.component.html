@@ -21,17 +21,24 @@
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title">{{list.name}}</p>
+                <a [routerLink]="" class="card-header-icon" aria-label="more options" (click)="deleteList(list.id)">
+                  <span class="icon">
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                  </span>
+                </a>
               </header>
               <div class="card-content">
                 <div class="content">
-                  <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id)" />
+                  <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id);cardName.value = ''" />
                   <div cdkDropList [cdkDropListData]="list.cards" class="drag-list" (cdkDropListDropped)="drop($event, list.id)">
                     <div class="app-card-content drag-box" *ngFor="let card of list.cards" cdkDrag>
                       <p class="app-card-text">
                         <strong>{{card.name}}</strong>
                       </p>
                       <p class="app-card-delete">
-                        <i class="far fa-times-circle" (click)="deleteCard(card.id, list.id)"></i>
+                        <span class="icon">
+                          <i class="far fa-trash-alt" (click)="deleteCard(card.id, list.id)"></i>
+                        </span>
                       </p>
                     </div>
                   </div>
