@@ -5,14 +5,14 @@
 
         <div class="card" (click)="showCreateBoard=!showCreateBoard" *ngIf="!showCreateBoard">
           <div class="card-content">
-            <div class="content">Create a board</div>
+            <div class="content"><strong>Create a board</strong></div>
           </div>
         </div>
 
         <div class="card" *ngIf="showCreateBoard">
           <header class="card-header">
             <p class="card-header-title">
-              Creating a Board
+              Create a Board
             </p>
             <a href="#" class="card-header-icon" aria-label="more options">
               <span class="icon" (click)="showCreateBoard=!showCreateBoard">
@@ -38,7 +38,12 @@
         <div class="column is-one-third" *ngFor="let board of boardList">
           <div class="card" (click)="onBoardSelect(board)">
             <div class="card-content">
-              <div class="content">{{board.name}}</div>
+              <div class="content">
+                <strong>{{board.name}}</strong>
+                <span class="delete-board-icon" (click)="deleteBoard(board.id);$event.stopPropagation();">
+                  <i class="far fa-trash-alt"></i>
+                </span>
+              </div>
             </div>
           </div>
         </div>

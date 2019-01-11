@@ -35,11 +35,16 @@ export class BoardListComponent implements OnInit {
     console.log(this.boardList);
   }
 
+  deleteBoard(boardId: number) {
+    this.boardListService.deleteBoard(boardId);
+    this.getBoardData();
+  }
+
   onBoardSelect(board: Board) {
     this.router.navigate(["board", board.id], { relativeTo: this.route });
   }
 
-  getBoardData() {
+  getBoardDataFromStore() {
     return this.boardListService.getBoardKeys().then(keys => {
       return Promise.all(
         keys.map(key => {
@@ -56,12 +61,17 @@ export class BoardListComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.getBoardData().then(val => {
+  getBoardData() {
+    this.boardList = [];
+    this.getBoardDataFromStore().then(val => {
       val.forEach(v => {
         let key = Object.keys(v)[0];
         this.boardList.push(v[key]);
       });
     });
+  }
+
+  ngOnInit() {
+    this.getBoardData();
   }
 }

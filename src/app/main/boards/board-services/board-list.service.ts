@@ -15,6 +15,10 @@ export class BoardListService {
     this.ngf.setItem(String(board.id), board);
   }
 
+  public deleteBoard(boardId: number) {
+    this.ngf.removeItem(String(boardId));
+  }
+
   public getBoardKeys(): Promise<string[]> {
     return this.ngf.keys();
   }
