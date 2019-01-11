@@ -2,13 +2,14 @@
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-third">
-        <div class="card has-text-white-bis has-background-primary app-board-title">
+        <div class="card app-board-title">
           <div class="card-content">
-            <div class="content">{{board?.name}}</div>
+            <div class="content"><strong class="has-text-light">{{board?.name}}</strong></div>
           </div>
         </div>
       </div>
     </div>
+
     <br />
     <br />
 
@@ -26,7 +27,12 @@
                   <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id)" />
                   <div cdkDropList [cdkDropListData]="list.cards" class="drag-list" (cdkDropListDropped)="drop($event, list.id)">
                     <div class="app-card-content drag-box" *ngFor="let card of list.cards" cdkDrag>
-                      <div class="content">{{card.name}}</div>
+                      <p class="app-card-text">
+                        <strong>{{card.name}}</strong>
+                      </p>
+                      <p class="app-card-delete">
+                        <i class="far fa-times-circle" (click)="deleteCard(card.id, list.id)"></i>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -41,7 +47,6 @@
               <div class="content">Add a List</div>
             </div>
           </div>
-
           <div class="card" *ngIf="showCreateList">
             <header class="card-header">
               <p class="card-header-title">Creating a List</p>
@@ -61,8 +66,8 @@
               <a [routerLink]="" class="card-footer-item" (click)="createList();showCreateList=!showCreateList">Create</a>
             </footer>
           </div>
-
         </div>
+
       </div>
     </div>
   </div>

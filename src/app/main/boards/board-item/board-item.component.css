@@ -1,7 +1,7 @@
 .app-board-title {
     opacity: 1;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 6px 6px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    background-color: rgb(202, 255, 222);
+    background-color: rgb(239, 71, 111);
     border-radius: 4.5px;
 }
 
@@ -9,7 +9,7 @@
     opacity: 1;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 6px 6px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     text-decoration: none;
-    background-color: rgb(202, 255, 222);
+    background-color: rgb(255, 209, 102);
     margin: 10px 0;
     padding: 14px 7px;
     border-radius: 4.5px;
@@ -26,6 +26,16 @@
     -webkit-justify-content: space-around;
     -ms-flex-pack: space-around;
     justify-content: space-around;
+}
+
+.app-card-text {
+    float: left;
+    margin: unset !important;
+}
+
+.app-card-delete {
+    float: right;
+    cursor: pointer;
 }
 
 .drag-list {

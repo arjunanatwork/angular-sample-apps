@@ -55,6 +55,14 @@ export class BoardItemComponent implements OnInit {
     this.boardItemService.saveBoard(this.board);
   }
 
+  deleteCard(cardId: number, listId: number) {
+    let cardIndex = this.board.list
+      .find(x => x.id === listId)
+      .cards.findIndex(i => i.id === cardId);
+    this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
+    this.boardItemService.saveBoard(this.board);
+  }
+
   drop(event: CdkDragDrop<string[]>, listId: number) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
