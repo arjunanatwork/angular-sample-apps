@@ -18,6 +18,7 @@ import { BoardMainComponent } from "./main/boards/board-main/board-main.componen
 import { BoardItemComponent } from "./main/boards/board-item/board-item.component";
 
 import { HackerNewsMainComponent } from "./main/hackernews/hackernews-main/hackernews-main.component";
+import { HackerNewsHeaderComponent } from "./main/hackernews/hackernews-header/hackernews-header.component";
 
 const routes: Routes = [
   { path: "", component: MainComponent, pathMatch: "full" },
@@ -41,7 +42,8 @@ const routes: Routes = [
     BoardMainComponent,
     BoardListComponent,
     BoardItemComponent,
-    HackerNewsMainComponent
+    HackerNewsMainComponent,
+    HackerNewsHeaderComponent
   ],
   imports: [
     BrowserModule,
