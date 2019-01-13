@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-main",
@@ -9,13 +9,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MainComponent implements OnInit {
   selectedApp: string;
   title = "This is the Main Component";
-  private id;
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.selectedApp = this.route.snapshot.paramMap.get('appName');
-    if(this.selectedApp == null){
-      this.router.navigate(['/trello-clone']); //Default App
+    this.selectedApp = this.route.snapshot.paramMap.get("appName");
+    if (this.selectedApp == null) {
+      this.router.navigate(["/trello-clone"]); //Default App
     }
   }
 }
