@@ -64,9 +64,10 @@ export class BoardItemComponent implements OnInit {
   }
 
   cardAction(cardId: number, listId: number, isCompleted: boolean) {
-    this.board.list
-      .find(x => x.id === listId)
-      .cards.find(i => i.id === cardId).isCompleted = isCompleted;
+    let cardIndex = this.getCardIndex(cardId, listId);
+    this.board.list.find(x => x.id === listId).cards[
+      cardIndex
+    ].isCompleted = isCompleted;
     this.boardItemService.saveBoard(this.board);
     if (isCompleted) {
       this.toastr.info("Card has been marked as completed", "", {
@@ -85,9 +86,7 @@ export class BoardItemComponent implements OnInit {
   }
 
   deleteCard(cardId: number, listId: number) {
-    let cardIndex = this.board.list
-      .find(x => x.id === listId)
-      .cards.findIndex(i => i.id === cardId);
+    let cardIndex = this.getCardIndex(cardId, listId);
     this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
     this.boardItemService.saveBoard(this.board);
     this.toastr.info("Card has been deleted", "", {
@@ -113,27 +112,10 @@ export class BoardItemComponent implements OnInit {
     this.boardItemService.saveBoard(this.board);
   }
 
-  createCard(value:string, listId: number) {
-    let card = new Card(
-      Math.floor(Math.random() * 1000) + 1,
-      value,
-      false
-    )
-    this.board.list.find(x=> x.id === listId).cards.push(card)
-    this.boardItemService.saveBoard(this.board);
-    console.log(this.listItems);
-  }
-
-  drop(event: CdkDragDrop<string[]>, listId:number) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-    this.boardItemService.saveBoard(this.board);
+  private getCardIndex(cardId: number, listId: number) {
+    return this.board.list
+      .find(x => x.id === listId)
+      .cards.findIndex(i => i.id === cardId);
   }
 
   ngOnInit(): void {

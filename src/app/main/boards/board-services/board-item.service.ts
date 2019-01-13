@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NgForage } from "ngforage";
 
-import { List } from "../board-shared/list.model";
 import { Board } from "../board-shared/board.model";
 
 import { GlobalVariable } from "../../../shared/constants/global";
