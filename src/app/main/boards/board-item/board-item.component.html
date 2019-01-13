@@ -2,29 +2,51 @@
   <div class="column is-full">
     <div class="columns">
       <div class="column is-one-third">
-        <div class="card has-text-white-bis has-background-primary app-board-title">
+        <div class="card app-board-title">
           <div class="card-content">
-            <div class="content">{{board?.name}}</div>
+            <div class="content"><strong class="has-text-light">{{board?.name}}</strong></div>
           </div>
         </div>
       </div>
     </div>
+
     <br />
     <br />
+
     <div cdkDropListGroup>
       <div class="columns is-multiline">
+
         <ng-template [ngIf]="board?.list?.length > 0">
           <div class="column is-one-third" *ngFor="let list of board.list">
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title">{{list.name}}</p>
+                <a [routerLink]="" class="card-header-icon" aria-label="more options" (click)="deleteList(list.id)">
+                  <span class="icon">
+                    <i class="far fa-trash-alt" aria-hidden="true"></i>
+                  </span>
+                </a>
               </header>
               <div class="card-content">
                 <div class="content">
-                  <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id)"/>
+                  <input class="input" type="text" placeholder="Text input" #cardName (keyup.enter)="createCard(cardName.value, list.id);cardName.value = ''" />
                   <div cdkDropList [cdkDropListData]="list.cards" class="drag-list" (cdkDropListDropped)="drop($event, list.id)">
                     <div class="app-card-content drag-box" *ngFor="let card of list.cards" cdkDrag>
-                      <div class="content">{{card.name}}</div>
+                      <p class="app-card-text">
+                        <strong *ngIf="!card.isCompleted; else strikeCard">{{card.name}}</strong>
+                        <ng-template #strikeCard><strong><del>{{card.name}}</del></strong></ng-template>
+                      </p>
+                      <p class="app-card-options">
+                        <span class="icon" *ngIf="!card.isCompleted">
+                          <i class="fas fa-check" (click)="cardAction(card.id, list.id, true)"></i>
+                        </span>
+                        <span class="icon" *ngIf="card.isCompleted">
+                          <i class="fas fa-redo" (click)="cardAction(card.id, list.id, false)"></i>
+                        </span>
+                        <span class="icon">
+                          <i class="far fa-trash-alt" (click)="deleteCard(card.id, list.id)"></i>
+                        </span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -39,7 +61,6 @@
               <div class="content">Add a List</div>
             </div>
           </div>
-
           <div class="card" *ngIf="showCreateList">
             <header class="card-header">
               <p class="card-header-title">Creating a List</p>
@@ -51,7 +72,7 @@
             </header>
             <div class="card-content">
               <div class="content">
-                <input class="input" type="text" placeholder="Text input" #listName/>
+                <input class="input" type="text" placeholder="Text input" #listName />
               </div>
             </div>
             <footer class="card-footer">

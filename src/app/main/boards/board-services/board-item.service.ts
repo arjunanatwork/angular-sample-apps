@@ -4,11 +4,13 @@ import { NgForage } from "ngforage";
 import { List } from "../board-shared/list.model";
 import { Board } from "../board-shared/board.model";
 
+import { GlobalVariable } from "../../../shared/constants/global";
+
 @Injectable()
 export class BoardItemService {
   constructor(private readonly ngf: NgForage) {
-    this.ngf.name = "trello-clone";
-    this.ngf.storeName = "boardCollection";
+    this.ngf.name = GlobalVariable.TRELLOCLONE_DB_NAME;
+    this.ngf.storeName = GlobalVariable.TRELLOCLONE_DB_STORE_NAME;
   }
 
   public getBoardInfo(id: string): Promise<Board> {

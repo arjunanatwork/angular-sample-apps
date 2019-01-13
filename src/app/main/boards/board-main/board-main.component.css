@@ -6,6 +6,7 @@ img.brand {
   -webkit-transition: all 200ms ease-in-out;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+  outline: none;
 }
 
 img.brand:hover {

@@ -1,12 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem
+} from "@angular/cdk/drag-drop";
+import { ToastrService } from "ngx-toastr";
 
 import { Board } from "../board-shared/board.model";
 import { List } from "../board-shared/list.model";
-import { Card } from "../board-shared/card.model";
 
 import { BoardItemService } from "../board-services/board-item.service";
+import { Card } from "../board-shared/card.model";
 
 @Component({
   selector: "board-item",
@@ -23,7 +28,8 @@ export class BoardItemComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private boardItemService: BoardItemService
+    private boardItemService: BoardItemService,
+    private toastr: ToastrService
   ) {}
 
   getBoardInfo(): void {
@@ -42,7 +48,69 @@ export class BoardItemComponent implements OnInit {
     );
     this.board.list.push(list);
     this.boardItemService.saveBoard(this.board);
-    console.log(this.listItems);
+    this.toastr.success("List " + list.name + " has been created", "", {
+      toastClass: "toast has-background-success	"
+    });
+  }
+
+  createCard(value: string, listId: number) {
+    console.log(value);
+    let card = new Card(Math.floor(Math.random() * 1000) + 1, value, false);
+    this.board.list.find(x => x.id == listId).cards.push(card);
+    this.boardItemService.saveBoard(this.board);
+    this.toastr.success("Card " + card.name + " has been created", "", {
+      toastClass: "toast has-background-success	"
+    });
+  }
+
+  cardAction(cardId: number, listId: number, isCompleted: boolean) {
+    this.board.list
+      .find(x => x.id === listId)
+      .cards.find(i => i.id === cardId).isCompleted = isCompleted;
+    this.boardItemService.saveBoard(this.board);
+    if (isCompleted) {
+      this.toastr.info("Card has been marked as completed", "", {
+        toastClass: "toast has-background-info"
+      });
+    }
+  }
+
+  deleteList(listId: number) {
+    let listIndex = this.board.list.findIndex(i => i.id === listId);
+    this.board.list.splice(listIndex, 1);
+    this.boardItemService.saveBoard(this.board);
+    this.toastr.info("List has been deleted", "", {
+      toastClass: "toast has-background-info"
+    });
+  }
+
+  deleteCard(cardId: number, listId: number) {
+    let cardIndex = this.board.list
+      .find(x => x.id === listId)
+      .cards.findIndex(i => i.id === cardId);
+    this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
+    this.boardItemService.saveBoard(this.board);
+    this.toastr.info("Card has been deleted", "", {
+      toastClass: "toast has-background-info"
+    });
+  }
+
+  drop(event: CdkDragDrop<string[]>, listId: number) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+    this.boardItemService.saveBoard(this.board);
   }
 
   createCard(value:string, listId: number) {
