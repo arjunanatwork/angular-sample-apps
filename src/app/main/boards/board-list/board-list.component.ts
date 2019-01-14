@@ -2,8 +2,8 @@ import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 
-import { Board } from "../board-shared/board.model";
-import { BoardListService } from "../board-services/board-list.service";
+import { Board } from "../board-shared/models/board.model";
+import { BoardListService } from "../board-shared/services/board-list.service";
 
 @Component({
   selector: "board-list",

@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { MainComponent } from "./main/main.component";
-
 const routes: Routes = [
   {
     path: "trello-clone",
@@ -11,8 +9,7 @@ const routes: Routes = [
   {
     path: "hackernews",
     loadChildren: "./main/hackernews/hackernews.module#HackerNewsModule"
-  },
-  { path: "", component: MainComponent, pathMatch: "full" }
+  }
 ];
 
 @NgModule({

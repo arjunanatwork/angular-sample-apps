@@ -2,33 +2,28 @@
     <ul>
         <li class="is-active">
             <a>
-                <span>Top Stories</span>
+                <span [routerLink]="['news']" routerLinkActive="is-active">Top</span>
             </a>
         </li>
         <li>
             <a>
-                <span>New</span>
+                <span [routerLink]="['newest']" routerLinkActive="is-active">New</span>
             </a>
         </li>
         <li>
             <a>
-                <span>Comments</span>
+                <span [routerLink]="['ask']" routerLinkActive="is-active">Ask</span>
             </a>
         </li>
         <li>
             <a>
-                <span>Ask</span>
-            </a>
-        </li>
-        <li>
-            <a>
-                <span>Show</span>
+                <span [routerLink]="['show']" routerLinkActive="is-active">Show</span>
             </a>
         </li>
 
         <li>
             <a>
-                <span>Jobs</span>
+                <span [routerLink]="['jobs']" routerLinkActive="is-active">Jobs</span>
             </a>
         </li>
     </ul>

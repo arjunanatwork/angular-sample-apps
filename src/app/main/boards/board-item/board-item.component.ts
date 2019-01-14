@@ -7,11 +7,11 @@ import {
 } from "@angular/cdk/drag-drop";
 import { ToastrService } from "ngx-toastr";
 
-import { Board } from "../board-shared/board.model";
-import { List } from "../board-shared/list.model";
+import { Board } from "../board-shared/models/board.model";
+import { List } from "../board-shared/models/list.model";
 
-import { BoardItemService } from "../board-services/board-item.service";
-import { Card } from "../board-shared/card.model";
+import { BoardItemService } from "../board-shared/services/board-item.service";
+import { Card } from "../board-shared/models/card.model";
 
 @Component({
   selector: "board-item",
