@@ -1,29 +1,28 @@
 <div class="tabs is-centered is-boxed is-medium">
     <ul>
-        <li class="is-active">
+        <li class="no-outline" [routerLink]="['news']" routerLinkActive="is-active">
             <a>
-                <span [routerLink]="['news']" routerLinkActive="is-active">Top</span>
+                <span>Top</span>
             </a>
         </li>
-        <li>
+        <li class="no-outline" [routerLink]="['newest']" routerLinkActive="is-active">
             <a>
-                <span [routerLink]="['newest']" routerLinkActive="is-active">New</span>
+                <span>New</span>
             </a>
         </li>
-        <li>
+        <li class="no-outline" [routerLink]="['ask']" routerLinkActive="is-active">
             <a>
-                <span [routerLink]="['ask']" routerLinkActive="is-active">Ask</span>
+                <span>Ask</span>
             </a>
         </li>
-        <li>
+        <li class="no-outline" [routerLink]="['show']" routerLinkActive="is-active">
             <a>
-                <span [routerLink]="['show']" routerLinkActive="is-active">Show</span>
+                <span>Show</span>
             </a>
         </li>
-
-        <li>
+        <li class="no-outline" [routerLink]="['jobs']" routerLinkActive="is-active">
             <a>
-                <span [routerLink]="['jobs']" routerLinkActive="is-active">Jobs</span>
+                <span>Jobs</span>
             </a>
         </li>
     </ul>

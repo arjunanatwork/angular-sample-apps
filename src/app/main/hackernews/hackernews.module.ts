@@ -1,4 +1,5 @@
 import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
 
 import { HackerNewsRoutingModule } from "./hackernews-routing.module";
@@ -8,7 +9,7 @@ import { HackerNewsHeaderComponent } from "./hackernews-header/hackernews-header
 import { HackerNewsFeedComponent } from "./hackernews-feed/hackernews-feed.component";
 
 @NgModule({
-  imports: [CommonModule, HackerNewsRoutingModule],
+  imports: [CommonModule, HttpClientModule, HackerNewsRoutingModule],
   declarations: [
     HackerNewsMainComponent,
     HackerNewsHeaderComponent,

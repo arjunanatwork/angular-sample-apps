@@ -1,1 +1,15 @@
-{{title}}
+<article class="post" *ngFor="let item of feedItems">
+    <div class="media">
+        <div class="media-content">
+            <div class="content">
+                <p class="is-marginless	">
+                    <strong>{{item.title}}</strong>
+                    <br>
+                </p>
+                <span>{{item.points}} points</span> by <a>{{item.user}}&nbsp;</a>
+                <span class="age"><a>{{item.time_ago}}</a></span> <span></span>
+                | <a>{{item.comments_count}}&nbsp;comments</a>
+            </div>
+        </div>
+    </div>
+</article>
