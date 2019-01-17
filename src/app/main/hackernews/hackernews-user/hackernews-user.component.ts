@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HackerNewsApiService } from "../hackernews-shared/services/hackernews-api.service";
-import { User } from "../hackernews-shared/models/user.modal";
+import { User } from "../hackernews-shared/models/user.model";
 
 @Component({
   selector: "hackernews-user",

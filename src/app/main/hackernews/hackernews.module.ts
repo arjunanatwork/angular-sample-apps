@@ -8,6 +8,7 @@ import { HackerNewsMainComponent } from "./hackernews-main/hackernews-main.compo
 import { HackerNewsHeaderComponent } from "./hackernews-header/hackernews-header.component";
 import { HackerNewsFeedComponent } from "./hackernews-feed/hackernews-feed.component";
 import { HackerNewsUserComponent } from "./hackernews-user/hackernews-user.component";
+import { HackerNewsItemComponent } from "./hackernews-item/hackernews-item.component";
 
 @NgModule({
   imports: [CommonModule, HttpClientModule, HackerNewsRoutingModule],
@@ -15,7 +16,8 @@ import { HackerNewsUserComponent } from "./hackernews-user/hackernews-user.compo
     HackerNewsMainComponent,
     HackerNewsHeaderComponent,
     HackerNewsFeedComponent,
-    HackerNewsUserComponent
+    HackerNewsUserComponent,
+    HackerNewsItemComponent
   ]
 })
 export class HackerNewsModule {}

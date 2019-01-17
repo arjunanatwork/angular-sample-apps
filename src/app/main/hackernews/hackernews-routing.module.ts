@@ -4,6 +4,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { HackerNewsMainComponent } from "./hackernews-main/hackernews-main.component";
 import { HackerNewsFeedComponent } from "./hackernews-feed/hackernews-feed.component";
 import { HackerNewsUserComponent } from "./hackernews-user/hackernews-user.component";
+import { HackerNewsItemComponent } from "./hackernews-item/hackernews-item.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
         path: "user/:id",
         component: HackerNewsUserComponent,
         data: { feedType: "user" }
+      },
+      {
+        path: "item/:id",
+        component: HackerNewsItemComponent,
+        data: { feedType: "item" }
       }
     ]
   }

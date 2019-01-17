@@ -7,7 +7,7 @@
             </p>
             <span>{{ item.points }} points</span> by <a (click)="navigateToUserInfo(item.user)">{{ item.user }}&nbsp;</a>
             <span class="age">{{ item.time_ago }}</span> <span></span> |
-            <a>{{ item.comments_count }}&nbsp;comments</a>
+            <a (click)="navigateToItemInfo(item.id)">{{ item.comments_count }}&nbsp;comments</a>
         </li>
     </ol>
 </div>

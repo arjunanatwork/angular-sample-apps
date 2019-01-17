@@ -39,6 +39,10 @@ export class HackerNewsFeedComponent implements OnInit {
     this.router.navigate(["user", id], { relativeTo: this.route.parent });
   }
 
+  navigateToItemInfo(id: number) {
+    this.router.navigate(["item", id], { relativeTo: this.route.parent });
+  }
+
   ngOnInit() {
     this.feedType = this.route.snapshot.data["feedType"];
     this.getFeedItems(this.feedType, this.currentPage);

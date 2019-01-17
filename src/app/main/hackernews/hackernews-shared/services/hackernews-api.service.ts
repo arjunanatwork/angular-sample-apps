@@ -4,7 +4,7 @@ import { FeedItem, FeedItemAdapter } from "../models/feedItem.model";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
-import { User, UserAdapter } from "../models/user.modal";
+import { User, UserAdapter } from "../models/user.model";
 
 const apiBaseUrl = environment.hackerNewsApiBaseUrl;
 
