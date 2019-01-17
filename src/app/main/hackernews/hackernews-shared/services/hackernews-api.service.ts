@@ -5,6 +5,7 @@ import { environment } from "src/environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { User, UserAdapter } from "../models/user.model";
+import { ItemAdapter, Item } from "../models/item.model";
 
 const apiBaseUrl = environment.hackerNewsApiBaseUrl;
 
@@ -15,7 +16,8 @@ export class HackerNewsApiService {
   constructor(
     private http: HttpClient,
     private adapter: FeedItemAdapter,
-    private userAdapter: UserAdapter
+    private userAdapter: UserAdapter,
+    private itemAdapter: ItemAdapter
   ) {}
 
   getFeedItems(feedType: string, page: number): Observable<FeedItem[]> {
@@ -30,5 +32,12 @@ export class HackerNewsApiService {
     return this.http
       .get(url)
       .pipe(map((data: any) => this.userAdapter.adapt(data)));
+  }
+
+  getItemDetails(id: string, feedType: string): Observable<Item> {
+    const url = apiBaseUrl + feedType + "/" + id;
+    return this.http
+      .get(url)
+      .pipe(map((data: any) => this.itemAdapter.adapt(data)));
   }
 }
