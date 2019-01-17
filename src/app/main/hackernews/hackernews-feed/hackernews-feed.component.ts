@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  Renderer2
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HackerNewsApiService } from "../hackernews-shared/services/hackernews-api.service";
 import { FeedItem } from "../hackernews-shared/models/feedItem.model";
@@ -13,16 +19,23 @@ export class HackerNewsFeedComponent implements OnInit {
   title = "This is the Feed Component";
   feedType: string;
   feedItems: FeedItem[] = [];
+  currentPage: number = 1;
+  listStartNo: number = 1;
 
   constructor(
     private route: ActivatedRoute,
     private hackerNewsApi: HackerNewsApiService
   ) {}
 
+  getFeedItems(feedType: string, currentPage: number) {
+    window.scroll(0, 0); //TODO: Should find a better way
+    this.hackerNewsApi
+      .getFeedItems(feedType, currentPage)
+      .subscribe((data: FeedItem[]) => (this.feedItems = data));
+  }
+
   ngOnInit() {
     this.feedType = this.route.snapshot.data["feedType"];
-    this.hackerNewsApi
-      .getFeedItems(this.feedType)
-      .subscribe((data: FeedItem[]) => (this.feedItems = data));
+    this.getFeedItems(this.feedType, this.currentPage);
   }
 }

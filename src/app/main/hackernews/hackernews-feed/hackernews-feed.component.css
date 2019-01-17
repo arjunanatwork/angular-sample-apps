@@ -1,4 +1,8 @@
-article.post {
-    margin: 1rem;
-    border-bottom: 1px solid #E6EAEE;
+li.post {
+    border-bottom: 1px solid #cececb;
+    padding: 10px 0px 5px 10px;
+}
+
+.news-navigation {
+    width: 50%;
 }

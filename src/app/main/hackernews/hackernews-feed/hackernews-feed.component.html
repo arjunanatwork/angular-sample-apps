@@ -1,15 +1,27 @@
-<article class="post" *ngFor="let item of feedItems">
-    <div class="media">
-        <div class="media-content">
-            <div class="content">
-                <p class="is-marginless	">
-                    <strong>{{item.title}}</strong>
-                    <br>
-                </p>
-                <span>{{item.points}} points</span> by <a>{{item.user}}&nbsp;</a>
-                <span class="age"><a>{{item.time_ago}}</a></span> <span></span>
-                | <a>{{item.comments_count}}&nbsp;comments</a>
-            </div>
-        </div>
+<div class="content">
+    <ol type="1" [start]="listStartNo">
+        <li class="post is-marginless" *ngFor="let item of feedItems">
+            <p class="is-marginless">
+                <strong>{{ item.title }}</strong> <br />
+            </p>
+            <span>{{ item.points }} points</span> by <a>{{ item.user }}&nbsp;</a>
+            <span class="age">{{ item.time_ago }}</span> <span></span> |
+            <a>{{ item.comments_count }}&nbsp;comments</a>
+        </li>
+    </ol>
+</div>
+
+<div class="paginate" *ngIf="feedItems?.length > 0">
+    <div class="is-pulled-left" *ngIf="currentPage != 1">
+        <a class="button is-primary" (click)="
+        getFeedItems(feedType, (currentPage = currentPage - 1));
+        listStartNo = listStartNo - 30
+      ">Prev</a>
     </div>
-</article>
+    <div class="is-pulled-right">
+        <a class="button is-primary" (click)="
+        getFeedItems(feedType, (currentPage = currentPage + 1));
+        listStartNo = listStartNo + 30
+      ">Next</a>
+    </div>
+</div>
