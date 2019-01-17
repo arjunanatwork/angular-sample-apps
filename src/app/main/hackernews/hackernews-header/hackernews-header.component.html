@@ -1,4 +1,4 @@
-<div class="tabs is-centered is-toggle is-medium">
+<div [ngClass]="{'is-small': isMobile,'is-medium':!isMobile}" class="tabs is-centered is-toggle">
     <ul>
         <li class="no-outline" [routerLink]="['news']" routerLinkActive="is-active">
             <a>

@@ -5,7 +5,7 @@ import {
   ViewChild,
   Renderer2
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HackerNewsApiService } from "../hackernews-shared/services/hackernews-api.service";
 import { FeedItem } from "../hackernews-shared/models/feedItem.model";
 
@@ -24,6 +24,7 @@ export class HackerNewsFeedComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private hackerNewsApi: HackerNewsApiService
   ) {}
 
@@ -32,6 +33,10 @@ export class HackerNewsFeedComponent implements OnInit {
     this.hackerNewsApi
       .getFeedItems(feedType, currentPage)
       .subscribe((data: FeedItem[]) => (this.feedItems = data));
+  }
+
+  navigateToUserInfo(id: string) {
+    this.router.navigate(["user", id], { relativeTo: this.route.parent });
   }
 
   ngOnInit() {

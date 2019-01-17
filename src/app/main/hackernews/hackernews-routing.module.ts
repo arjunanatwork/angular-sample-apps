@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { HackerNewsMainComponent } from "./hackernews-main/hackernews-main.component";
 import { HackerNewsFeedComponent } from "./hackernews-feed/hackernews-feed.component";
+import { HackerNewsUserComponent } from "./hackernews-user/hackernews-user.component";
 
 const routes: Routes = [
   {
@@ -34,6 +35,11 @@ const routes: Routes = [
         path: "jobs",
         component: HackerNewsFeedComponent,
         data: { feedType: "jobs" }
+      },
+      {
+        path: "user/:id",
+        component: HackerNewsUserComponent,
+        data: { feedType: "user" }
       }
     ]
   }
