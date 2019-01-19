@@ -1,0 +1,10 @@
+<ng-template [ngIf]="itemInfo">
+    <div class="content is-small">
+        <div class="item-header-content">
+            <h1>{{itemInfo.title}}</h1>
+            <p>{{itemInfo.domain}}</p>
+            <p>{{itemInfo.points}} points by {{itemInfo.user}} {{itemInfo.time_ago}}</p>
+        </div>
+    </div>
+    <hackernews-item-comments [itemComments]="itemInfo.comments"></hackernews-item-comments>
+</ng-template>

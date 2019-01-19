@@ -1,0 +1,13 @@
+<ng-template ngFor let-commentItem [ngForOf]="itemComments">
+    <div class="content is-small">
+        <div class="user-info">
+            <span><a class="has-text-danger" [routerLink]="['../../user',commentItem.user]">{{commentItem.user}}</a>&nbsp;</span><span>{{commentItem.time_ago}}</span>
+        </div>
+        <div class="comment-info">
+            <span [innerHTML]="commentItem.content"></span>
+        </div>
+        <div class="reply-info">
+            <hackernews-item-comments [itemComments]="commentItem.comments"></hackernews-item-comments>
+        </div>
+    </div>
+</ng-template>

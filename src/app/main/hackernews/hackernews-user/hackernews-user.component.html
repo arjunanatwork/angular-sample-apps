@@ -1,8 +1,8 @@
-<div class="user-header-content is-clearfix	">
-    <p class=" is-pulled-left is-size-2-desktop"> {{userInfo.id}} </p>
-    <p class="is-pulled-right is-size-2-desktop"><i class="fas fa-star is-size-2-desktop has-text-link	"></i>&nbsp;{{userInfo.karma}}</p>
+<div class="content is-small">
+    <div class="user-header-content is-clearfix	">
+        <h1 class=" is-pulled-left"> {{userInfo?.id}} </h1>
+        <h1 class="is-pulled-right is-marginless"><i class="fas fa-star has-text-link	"></i>&nbsp;{{userInfo?.karma}}</h1>
+    </div>
+    <p class="is-size-6-desktop is-size-6-mobile">{{userInfo?.created}}</p>
+    <p class="is-size-6-desktop is-size-6-mobile" [innerHTML]="userInfo?.about"></p>
 </div>
-<br />
-<p class="subtitle is-4">{{userInfo.created}}</p>
-<br />
-<p class="subtitle is-4">{{userInfo.about}}</p>

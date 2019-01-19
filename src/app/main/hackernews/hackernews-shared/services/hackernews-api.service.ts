@@ -31,6 +31,12 @@ export class HackerNewsApiService {
     const url = apiBaseUrl + feedType + "/" + id;
     return this.http
       .get(url)
-      .pipe(map((data: any) => this.userAdapter.adapt(data)));
+      .pipe(
+        map((data: any) =>
+          feedType === "user"
+            ? this.userAdapter.adapt(data)
+            : this.itemAdapter.adapt(data)
+        )
+      );
   }
 }
