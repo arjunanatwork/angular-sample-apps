@@ -1,5 +1,5 @@
 <div class="content">
-    <ol type="1" [start]="listStartNo">
+    <ol type="1" [start]="listStartNo" style="margin-left: 1.5em;">
         <li class="post is-marginless" *ngFor="let item of feedItems">
             <p class="is-marginless">
                 <a [href]="item.url" style="color: black;font-weight: 600;">{{ item.title }}</a>&nbsp;({{item.domain}})
