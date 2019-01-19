@@ -17,7 +17,8 @@ export class Item {
     public domain: string,
     public comments: Item[],
     public level: number,
-    public comments_count: number
+    public comments_count: number,
+    public expanded: boolean = true
   ) {}
 }
 
@@ -39,9 +40,10 @@ export class ItemAdapter implements Adapter<Item> {
       feeditem.type,
       feeditem.url,
       feeditem.domain,
-      feeditem.comments,
+      feeditem.comments.map(i => this.adapt(i)),
       feeditem.level,
-      feeditem.comments_count
+      feeditem.comments_count,
+      true
     );
     return item;
   }

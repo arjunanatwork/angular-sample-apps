@@ -10,3 +10,7 @@
 .comment-info {
     padding-top: 0.5em;
 }
+
+.collapse:hover {
+    cursor: pointer;
+}

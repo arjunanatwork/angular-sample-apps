@@ -1,12 +1,14 @@
-<ng-template ngFor let-commentItem [ngForOf]="itemComments">
+<ng-template ngFor let-commentItem [ngForOf]="itemComments" let-i="index">
     <div class="content is-small">
         <div class="user-info">
+            <span class="collapse" *ngIf="commentItem.expanded" (click)="commentItem.expanded=!commentItem.expanded">[-]&nbsp;</span>
+            <span class="collapse" *ngIf="!commentItem.expanded" (click)="commentItem.expanded=!commentItem.expanded">[+]&nbsp;</span>
             <span><a class="has-text-danger" [routerLink]="['../../user',commentItem.user]">{{commentItem.user}}</a>&nbsp;</span><span>{{commentItem.time_ago}}</span>
         </div>
-        <div class="comment-info">
+        <div class="comment-info" *ngIf="commentItem.expanded">
             <span [innerHTML]="commentItem.content"></span>
         </div>
-        <div class="reply-info">
+        <div class="reply-info" *ngIf="commentItem.expanded">
             <hackernews-item-comments [itemComments]="commentItem.comments"></hackernews-item-comments>
         </div>
     </div>
