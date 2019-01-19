@@ -27,17 +27,10 @@ export class HackerNewsApiService {
       .pipe(map((data: any[]) => data.map(item => this.adapter.adapt(item))));
   }
 
-  getUserDetails(id: string, feedType: string): Observable<User> {
+  getFeedDetails(id: string, feedType: string): Observable<any> {
     const url = apiBaseUrl + feedType + "/" + id;
     return this.http
       .get(url)
       .pipe(map((data: any) => this.userAdapter.adapt(data)));
-  }
-
-  getItemDetails(id: string, feedType: string): Observable<Item> {
-    const url = apiBaseUrl + feedType + "/" + id;
-    return this.http
-      .get(url)
-      .pipe(map((data: any) => this.itemAdapter.adapt(data)));
   }
 }

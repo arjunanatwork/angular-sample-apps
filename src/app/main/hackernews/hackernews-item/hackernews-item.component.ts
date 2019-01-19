@@ -21,7 +21,7 @@ export class HackerNewsItemComponent implements OnInit {
   getItemInfo() {
     const id = this.route.snapshot.paramMap.get("id");
     this.hackerNewsApi
-      .getItemDetails(id, this.feedType)
+      .getFeedDetails(id, this.feedType)
       .subscribe((data: Item) => console.log(data));
   }
 

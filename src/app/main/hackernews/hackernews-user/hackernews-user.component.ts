@@ -22,7 +22,7 @@ export class HackerNewsUserComponent implements OnInit {
   getUserInfo() {
     const id = this.route.snapshot.paramMap.get("id");
     this.hackerNewsApi
-      .getUserDetails(id, this.feedType)
+      .getFeedDetails(id, this.feedType)
       .subscribe((data: User) => (this.userInfo = data));
   }
 
