@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: "hackernews",
     loadChildren: "./main/hackernews/hackernews.module#HackerNewsModule"
+  },
+  {
+    path: "pokedex",
+    loadChildren: "./main/pokedex/pokedex.module#PokedexModule"
   }
 ];
 
