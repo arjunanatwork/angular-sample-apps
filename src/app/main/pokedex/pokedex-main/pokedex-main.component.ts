@@ -6,5 +6,5 @@ import { Component } from "@angular/core";
   styleUrls: ["./pokedex-main.component.css"]
 })
 export class PokedexMainComponent {
-  title = "This is the Main Board Component";
+  title = "This is the Pokedex Main Component";
 }
