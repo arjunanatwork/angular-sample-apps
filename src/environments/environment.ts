@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  hackerNewsApiBaseUrl: "http://node-hnapi.herokuapp.com/"
+  hackerNewsApiBaseUrl: "http://node-hnapi.herokuapp.com/",
+  pokedexApiBaseUrl: "https://pokeapi.co/api/v2/"
 };

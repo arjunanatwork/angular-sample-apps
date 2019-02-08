@@ -7,7 +7,14 @@ const routes: Routes = [
   {
     path: "",
     component: PokedexMainComponent,
-    children: [{ path: "", component: PokedexListComponent }]
+    children: [
+      { path: "", redirectTo: "pokemon", pathMatch: "full" },
+      {
+        path: "pokemon",
+        component: PokedexListComponent,
+        data: { feedType: "pokemon" }
+      }
+    ]
   }
 ];
 

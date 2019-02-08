@@ -1,10 +1,22 @@
-<div class="tile is-ancestor">
-    <div class="tile is-2 is-parent">
-        <article class="tile is-child box">
-            <figure class="image is-4by3">
-                <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
-            <p class="title has-text-centered is-size-6-desktop" style="margin-top: 15px;">Middle box</p>
-        </article>
+<div class="columns is-multiline">
+    <div class="column is-one-third" *ngFor="let pokemon of pokemons">
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-96x96">
+                        <img [src]="pokemon?.sprites.front_default" alt="Image" />
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>{{pokemon?.name}}</strong> <br />
+                            Weight : {{pokemon?.weight}} <br />
+                            Base Experirence : {{pokemon?.base_experience}}
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
     </div>
 </div>
