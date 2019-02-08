@@ -20,3 +20,12 @@
         </div>
     </div>
 </div>
+
+<div class="paginate" *ngIf="pokemons?.length > 0">
+    <div class="is-pulled-left" *ngIf="feedItem.previous != null ">
+        <a class="button is-primary" (click)="getFeedData(feedItem.previous)">Prev</a>
+    </div>
+    <div class="is-pulled-right">
+        <a class="button is-primary" (click)="getFeedData(feedItem.next)">Next</a>
+    </div>
+</div>

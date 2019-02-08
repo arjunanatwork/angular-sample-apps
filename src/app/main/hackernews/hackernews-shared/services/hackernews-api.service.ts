@@ -9,9 +9,7 @@ import { ItemAdapter, Item } from "../models/item.model";
 
 const apiBaseUrl = environment.hackerNewsApiBaseUrl;
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class HackerNewsApiService {
   constructor(
     private http: HttpClient,

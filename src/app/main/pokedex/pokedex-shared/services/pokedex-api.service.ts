@@ -1,37 +1,42 @@
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { PokemonAdapter, Pokemon } from "../models/pokemon.model";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FeedItem, FeedItemAdapter } from "../models/feeditem.model";
+import { CacheService } from "src/app/shared/services/cache.service";
 
-const apiBaseUrl = environment.pokedexApiBaseUrl;
-
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class PokedexService {
   constructor(
     private http: HttpClient,
+    private cacheService: CacheService,
     private pokemonAdapter: PokemonAdapter,
-    private feedTypeAdapter: FeedItemAdapter
+    private feedItemAdapter: FeedItemAdapter
   ) {}
 
   getPokemon(pokemonUrl: string): Observable<Pokemon> {
+    let pokemonsFromCache = this.cacheService.getResponsefromCache(pokemonUrl);
+    if (pokemonsFromCache) {
+      console.log("Data returned from Cache");
+      return pokemonsFromCache;
+    }
+    console.log("No Data returned from Cache, calling API");
     const url = pokemonUrl;
     return this.http.get(url).pipe(
       map(data => {
-        return this.pokemonAdapter.adapt(data);
+        let pokemonData = this.pokemonAdapter.adapt(data);
+        this.cacheService.setDataToCache(pokemonUrl, pokemonData);
+        return pokemonData;
       })
     );
   }
 
-  getFeedTypeResults(feedType: string): Observable<FeedItem> {
-    const url = apiBaseUrl + feedType;
+  getFeedData(feedUrl: string): Observable<FeedItem> {
+    const url = feedUrl;
     return this.http.get(url).pipe(
       map(data => {
-        return this.feedTypeAdapter.adapt(data);
+        return this.feedItemAdapter.adapt(data);
       })
     );
   }
