@@ -1,4 +1,4 @@
-<pokedex-header (typeSelected)="typeSelected($event)"></pokedex-header>
+<pokedex-header (typeSelected)="typeSelected($event)" (nameSearch)="nameSearch($event)"></pokedex-header>
 
 <div class="columns is-multiline" style="margin-bottom: 20px;">
     <div class="column is-one-third" *ngFor="let pokemon of pokemons">
@@ -22,6 +22,10 @@
                 </div>
             </article>
         </div>
+    </div>
+    <br />
+    <div class="column" *ngIf="pokemons?.length == 0" style="text-align: center">
+        No Records
     </div>
 </div>
 

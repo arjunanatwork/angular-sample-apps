@@ -60,9 +60,25 @@ export class PokedexListComponent implements OnInit {
         this.getPokemonData(data.pokemon);
       });
     } else {
-      const url = apiBaseUrl + this.route.snapshot.data["feedType"];
+      const url = apiBaseUrl + this.feedType;
       this.getFeedData(url);
     }
+  }
+
+  nameSearch(name: string) {
+    this.pokedexService
+      .getPokemonByName(apiBaseUrl + this.feedType, name)
+      .subscribe(
+        data => {
+          this.feedItem = new FeedItem(null, null, null, null); //Currently only single record search so no pagination
+          this.pokemons = [];
+          this.pokemons.push(data);
+        },
+        error => {
+          console.warn("Error while searching by Name");
+          this.pokemons = [];
+        }
+      );
   }
 
   ngOnInit() {

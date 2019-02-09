@@ -1,5 +1,6 @@
 <div class="dropdown" [ngClass]="{'is-active': isActive}" (click)="isActive=!isActive" style="margin-bottom: 1rem;">
     <div class="dropdown-trigger">
+        <span class="filter-type">Filter By Type:&nbsp;</span>
         <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
             <span *ngIf="typeName == null;else showTypeName">Filter By Type</span>
             <ng-template #showTypeName>
@@ -19,5 +20,16 @@
                 {{result?.name}}
             </a>
         </div>
+    </div>
+</div>
+
+<div class="field has-addons" style="margin-bottom: 1rem;">
+    <div class="control is-expanded">
+        <input class="input" type="text" placeholder="Search Pokemon (Enter Exact Name)" #pokemonName (keyup.enter)="searchByName(pokemonName)">
+    </div>
+    <div class="control">
+        <a class="button is-info" (click)="searchByName(pokemonName)">
+            Search
+        </a>
     </div>
 </div>

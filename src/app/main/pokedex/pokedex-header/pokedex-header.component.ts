@@ -1,4 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
 import { environment } from "src/environments/environment";
 import { PokedexService } from "../pokedex-shared/services/pokedex-api.service";
 import { FeedItem } from "../pokedex-shared/models/feeditem.model";
@@ -18,12 +25,25 @@ export class PokedexHeaderComponent implements OnInit {
   typeName: string;
 
   @Output() typeSelected = new EventEmitter<string>();
+  @Output() nameSearch = new EventEmitter<string>();
+
+  @ViewChild("pokemonName") pokemonName: ElementRef;
 
   constructor(private pokedexService: PokedexService) {}
 
   filterByType(type: string, name: string) {
     this.typeName = name;
+    this.pokemonName.nativeElement.value = ""; //Reset Value when filter is selected
     this.typeSelected.emit(type);
+  }
+
+  searchByName(name: HTMLInputElement) {
+    if (name.value) {
+      this.typeName = null;
+      this.nameSearch.emit(name.value.toLowerCase());
+    } else {
+      this.filterByType("all", "all");
+    }
   }
 
   getFeedData(url: string) {
@@ -35,5 +55,6 @@ export class PokedexHeaderComponent implements OnInit {
   ngOnInit() {
     const typleUrl = apiBaseUrl + "type";
     this.getFeedData(typleUrl);
+    this.typeName = "all"; //Deafult All Filter
   }
 }

@@ -34,6 +34,17 @@ export class PokedexService {
     );
   }
 
+  getPokemonByName(pokemonUrl: string, name: string): Observable<Pokemon> {
+    const url = pokemonUrl + "/" + name;
+    return this.http.get(url).pipe(
+      map(data => {
+        let pokemonData = this.pokemonAdapter.adapt(data);
+        this.cacheService.setDataToCache(pokemonUrl, pokemonData);
+        return pokemonData;
+      })
+    );
+  }
+
   getTypeFeed(typeUrl: string): Observable<TypeFeed> {
     const url = typeUrl;
     return this.http.get(url).pipe(
