@@ -22,6 +22,7 @@ export class PokedexListComponent implements OnInit {
   pokemons: Pokemon[];
 
   isActive: boolean = false;
+  dropdown_isActive: boolean = false;
   selectedPokemon: Pokemon;
 
   constructor(
@@ -29,7 +30,7 @@ export class PokedexListComponent implements OnInit {
     private pokedexService: PokedexService
   ) {}
 
-  getPokemonData(results: Results[]) {
+  getPokemonData(results: any) {
     let batch = results.map(result => {
       return this.pokedexService.getPokemon(result.url);
     });
@@ -50,6 +51,18 @@ export class PokedexListComponent implements OnInit {
     this.isActive = true;
     console.log(pokemon);
     this.selectedPokemon = pokemon;
+  }
+
+  typeSelected(type: string) {
+    if (type != "all") {
+      this.pokedexService.getTypeFeed(type).subscribe(data => {
+        this.feedItem = new FeedItem(null, null, null, null);
+        this.getPokemonData(data.pokemon);
+      });
+    } else {
+      const url = apiBaseUrl + this.route.snapshot.data["feedType"];
+      this.getFeedData(url);
+    }
   }
 
   ngOnInit() {

@@ -1,10 +1,16 @@
+<pokedex-header (typeSelected)="typeSelected($event)"></pokedex-header>
+
 <div class="columns is-multiline" style="margin-bottom: 20px;">
     <div class="column is-one-third" *ngFor="let pokemon of pokemons">
         <div class="box" (click)="showPokemonDetails(pokemon)">
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-96x96">
-                        <img [src]="pokemon?.sprites.front_default" alt="Image" />
+                        <img *ngIf="pokemon?.sprites.front_default!=null; else noImage" [src]="pokemon?.sprites.front_default"
+                            [alt]="pokemon?.name" />
+                        <ng-template #noImage>
+                            <img src="assets/images/noimage.png" alt="" />
+                        </ng-template>
                     </figure>
                 </div>
                 <div class="media-content">
@@ -19,11 +25,15 @@
     </div>
 </div>
 
+<go-top-button [animate]="true" [speed]="50" [acceleration]="2" [scrollDistance]="300">
+    <i class="fas fa-arrow-up"></i>
+</go-top-button>
+
 <div class="paginate" *ngIf="pokemons?.length > 0">
     <div class="is-pulled-left" *ngIf="feedItem.previous != null ">
         <a class="button is-primary" (click)="getFeedData(feedItem.previous)">Prev</a>
     </div>
-    <div class="is-pulled-right">
+    <div class="is-pulled-right" *ngIf="feedItem.next != null ">
         <a class="button is-primary" (click)="getFeedData(feedItem.next)">Next</a>
     </div>
 </div>

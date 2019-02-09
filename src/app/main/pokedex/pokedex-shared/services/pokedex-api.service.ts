@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { FeedItem, FeedItemAdapter } from "../models/feeditem.model";
 import { CacheService } from "src/app/shared/services/cache.service";
+import { TypeFeedAdapter, TypeFeed } from "../models/type.model";
 
 @Injectable()
 export class PokedexService {
@@ -12,7 +13,8 @@ export class PokedexService {
     private http: HttpClient,
     private cacheService: CacheService,
     private pokemonAdapter: PokemonAdapter,
-    private feedItemAdapter: FeedItemAdapter
+    private feedItemAdapter: FeedItemAdapter,
+    private typeFeedAdapter: TypeFeedAdapter
   ) {}
 
   getPokemon(pokemonUrl: string): Observable<Pokemon> {
@@ -28,6 +30,15 @@ export class PokedexService {
         let pokemonData = this.pokemonAdapter.adapt(data);
         this.cacheService.setDataToCache(pokemonUrl, pokemonData);
         return pokemonData;
+      })
+    );
+  }
+
+  getTypeFeed(typeUrl: string): Observable<TypeFeed> {
+    const url = typeUrl;
+    return this.http.get(url).pipe(
+      map(data => {
+        return this.typeFeedAdapter.adapt(data);
       })
     );
   }
