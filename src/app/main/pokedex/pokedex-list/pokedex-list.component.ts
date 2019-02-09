@@ -21,6 +21,9 @@ export class PokedexListComponent implements OnInit {
   feedItem: FeedItem;
   pokemons: Pokemon[];
 
+  isActive: boolean = false;
+  selectedPokemon: Pokemon;
+
   constructor(
     private route: ActivatedRoute,
     private pokedexService: PokedexService
@@ -41,6 +44,12 @@ export class PokedexListComponent implements OnInit {
       this.feedItem = data;
       this.getPokemonData(data.results);
     });
+  }
+
+  showPokemonDetails(pokemon: Pokemon) {
+    this.isActive = true;
+    console.log(pokemon);
+    this.selectedPokemon = pokemon;
   }
 
   ngOnInit() {

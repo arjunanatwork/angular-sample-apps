@@ -6,13 +6,24 @@ export class Pokemon {
     public id: number,
     public name: string,
     public weight: number,
+    public height: number,
     public base_experience: number,
-    public sprites: Sprites
+    public sprites: Sprites,
+    public types: Type[],
+    public abilities: Ability[]
   ) {}
 }
 
 export class Sprites {
   constructor(public front_default: string) {}
+}
+
+export class Type {
+  constructor(public name: string, public url: string) {}
+}
+
+export class Ability {
+  constructor(public name: string, public url: string) {}
 }
 
 @Injectable({
@@ -21,12 +32,21 @@ export class Sprites {
 export class PokemonAdapter implements Adapter<Pokemon> {
   adapt(feeditem: any): Pokemon {
     let sprites = new Sprites(feeditem.sprites.front_default);
+    //Map types
+    let types = feeditem.types.map(i => new Type(i.type.name, i.type.url));
+    let abilities = feeditem.abilities.map(
+      i => new Ability(i.ability.name, i.ability.url)
+    );
+
     let item = new Pokemon(
       feeditem.id,
       feeditem.name,
       feeditem.weight,
+      feeditem.height,
       feeditem.base_experience,
-      sprites
+      sprites,
+      types,
+      abilities
     );
     return item;
   }

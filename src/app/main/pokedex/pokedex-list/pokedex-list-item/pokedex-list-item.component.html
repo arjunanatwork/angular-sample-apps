@@ -1,0 +1,33 @@
+<div id="modal" class="modal" [ngClass]="{'is-active': isActive}">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="box">
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <div class="pokemon-header" style="text-align: center;margin-bottom: 0.5rem;">
+                            <img [src]="pokemon.sprites.front_default" alt="pokemon.name">
+                            <p class="is-size-4-desktop is-size-4-touch">
+                                <strong>{{pokemon.name}}</strong>
+                            </p>
+                            <button class="delete" aria-label="close" (click)="isActive=!isActive"></button>
+                        </div>
+                        <div class="pokemon-info" style="text-align: center">
+                            <p>Height: {{pokemon.height}}</p>
+                            <p>Weight: {{pokemon.weight}}</p>
+                            <p>Base Experience: {{pokemon.base_experience}}</p>
+                            <h5>Types</h5>
+                            <div class="pokemon-type align-pokemon-attr">
+                                <div class="tag is-info is-medium" *ngFor="let types of pokemon.types">{{types.name}}</div>
+                            </div>
+                            <h5>Ability</h5>
+                            <div class="pokemon-ability align-pokemon-attr">
+                                <div class="tag is-info is-medium" *ngFor="let ability of pokemon.abilities">{{ability.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>

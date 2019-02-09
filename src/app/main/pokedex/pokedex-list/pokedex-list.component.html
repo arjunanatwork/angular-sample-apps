@@ -1,6 +1,6 @@
-<div class="columns is-multiline">
+<div class="columns is-multiline" style="margin-bottom: 20px;">
     <div class="column is-one-third" *ngFor="let pokemon of pokemons">
-        <div class="box">
+        <div class="box" (click)="showPokemonDetails(pokemon)">
             <article class="media">
                 <div class="media-left">
                     <figure class="image is-96x96">
@@ -9,10 +9,8 @@
                 </div>
                 <div class="media-content">
                     <div class="content">
-                        <p>
-                            <strong>{{pokemon?.name}}</strong> <br />
-                            Weight : {{pokemon?.weight}} <br />
-                            Base Experirence : {{pokemon?.base_experience}}
+                        <p style="margin-top: 35px" class="is-size-6-desktop">
+                            <strong>{{pokemon?.name}}</strong>
                         </p>
                     </div>
                 </div>
@@ -29,3 +27,7 @@
         <a class="button is-primary" (click)="getFeedData(feedItem.next)">Next</a>
     </div>
 </div>
+
+<ng-template [ngIf]="isActive">
+    <pokedex-list-item [pokemon]="selectedPokemon" [(isActive)]="isActive"></pokedex-list-item>
+</ng-template>

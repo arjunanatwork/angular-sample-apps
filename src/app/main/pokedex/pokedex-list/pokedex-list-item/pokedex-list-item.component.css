@@ -1,0 +1,10 @@
+.align-pokemon-attr {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 0.8888em;
+}
+
+.delete {
+    float: right;
+    bottom: 160px;
+}
