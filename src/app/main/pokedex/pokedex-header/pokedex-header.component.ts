@@ -47,7 +47,7 @@ export class PokedexHeaderComponent implements OnInit {
   }
 
   getFeedData(url: string) {
-    this.pokedexService.getFeedData(url).subscribe(data => {
+    this.pokedexService.getFeedData(url, "namedResource").subscribe(data => {
       this.feedItem = data;
     });
   }

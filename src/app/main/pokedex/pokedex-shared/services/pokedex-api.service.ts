@@ -18,48 +18,58 @@ export class PokedexService {
   ) {}
 
   getPokemon(pokemonUrl: string): Observable<Pokemon> {
-    let pokemonsFromCache = this.cacheService.getResponsefromCache(pokemonUrl);
-    if (pokemonsFromCache) {
+    let pokemonDataFromCache = this.checkCacheData(pokemonUrl);
+    if (pokemonDataFromCache) {
       console.log("Data returned from Cache");
-      return pokemonsFromCache;
+      return pokemonDataFromCache;
     }
     console.log("No Data returned from Cache, calling API");
     const url = pokemonUrl;
-    return this.http.get(url).pipe(
-      map(data => {
-        let pokemonData = this.pokemonAdapter.adapt(data);
-        this.cacheService.setDataToCache(pokemonUrl, pokemonData);
-        return pokemonData;
-      })
-    );
+    return this.getPokemonData(url);
   }
 
   getPokemonByName(pokemonUrl: string, name: string): Observable<Pokemon> {
     const url = pokemonUrl + "/" + name;
+    let pokemonDataByNameFromCache = this.checkCacheData(url);
+    if (pokemonDataByNameFromCache) {
+      console.log("Data returned from Cache");
+      return pokemonDataByNameFromCache;
+    }
+    console.log("No Data returned from Cache, calling API");
+    return this.getPokemonData(url);
+  }
+
+  getPokemonData(url: string): Observable<Pokemon> {
     return this.http.get(url).pipe(
       map(data => {
         let pokemonData = this.pokemonAdapter.adapt(data);
-        this.cacheService.setDataToCache(pokemonUrl, pokemonData);
+        this.cacheService.setDataToCache(url, pokemonData);
         return pokemonData;
       })
     );
   }
 
-  getTypeFeed(typeUrl: string): Observable<TypeFeed> {
-    const url = typeUrl;
-    return this.http.get(url).pipe(
-      map(data => {
-        return this.typeFeedAdapter.adapt(data);
-      })
-    );
+  checkCacheData(url: string): Observable<any> {
+    return this.cacheService.getResponsefromCache(url);
   }
 
-  getFeedData(feedUrl: string): Observable<FeedItem> {
+  getFeedData(feedUrl: string, feedType: string): Observable<any> {
     const url = feedUrl;
-    return this.http.get(url).pipe(
-      map(data => {
-        return this.feedItemAdapter.adapt(data);
-      })
-    );
+    switch (feedType) {
+      case "namedResource":
+        return this.http.get(url).pipe(
+          map(data => {
+            return this.feedItemAdapter.adapt(data);
+          })
+        );
+      case "typeResource":
+        return this.http.get(url).pipe(
+          map(data => {
+            return this.typeFeedAdapter.adapt(data);
+          })
+        );
+      default:
+        break;
+    }
   }
 }

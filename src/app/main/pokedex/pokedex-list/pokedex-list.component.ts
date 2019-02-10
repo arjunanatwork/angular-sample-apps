@@ -41,7 +41,7 @@ export class PokedexListComponent implements OnInit {
 
   getFeedData(url: string) {
     window.scroll(0, 0); //TODO: Should find a better way
-    this.pokedexService.getFeedData(url).subscribe(data => {
+    this.pokedexService.getFeedData(url, "namedResource").subscribe(data => {
       this.feedItem = data;
       this.getPokemonData(data.results);
     });
@@ -55,7 +55,7 @@ export class PokedexListComponent implements OnInit {
 
   typeSelected(type: string) {
     if (type != "all") {
-      this.pokedexService.getTypeFeed(type).subscribe(data => {
+      this.pokedexService.getFeedData(type, "typeResource").subscribe(data => {
         this.feedItem = new FeedItem(null, null, null, null);
         this.getPokemonData(data.pokemon);
       });
