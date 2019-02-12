@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.selectedApp = this.route.snapshot.paramMap.get("appName");
     if (this.selectedApp == null) {
-      this.router.navigate(["/pokedex"]); //Default App
+      this.router.navigate(["/bhagavadgita"]); //Default App
     }
   }
 }

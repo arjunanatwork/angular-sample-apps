@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: "pokedex",
     loadChildren: "./main/pokedex/pokedex.module#PokedexModule"
+  },
+  {
+    path: "bhagavadgita",
+    loadChildren: "./main/bhagavadgita/bhagavadgita.module#BhagavadGitaModule"
   }
 ];
 
