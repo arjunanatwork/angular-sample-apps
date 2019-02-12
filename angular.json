@@ -22,9 +22,15 @@
             ],
             "styles": [
               "node_modules/bulma/css/bulma.css",
-              "src/styles.css",
+              "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules",
+                "node_modules/bulma/sass/utilities"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -80,5 +86,10 @@
       "projectType": "application"
     }
   },
-  "defaultProject": "app"
+  "defaultProject": "app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
