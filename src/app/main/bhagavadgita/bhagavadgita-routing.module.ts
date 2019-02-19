@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: "",
     component: BhagavadGitaMainComponent,
-    children: [{ path: "", component: BhagavadGitaChaptersComponent }]
+    children: [{ path: "chapters", component: BhagavadGitaChaptersComponent }]
   }
 ];
 
