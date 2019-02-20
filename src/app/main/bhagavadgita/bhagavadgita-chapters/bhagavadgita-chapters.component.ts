@@ -4,8 +4,8 @@ import { Component } from "@angular/core";
   selector: "bhagavadgita-chapters",
   templateUrl: "./bhagavadgita-chapters.component.html",
   styleUrls: [
-    "./bhagavadgita-chapters.component.scss",
-    "../bhagavadgita.component.scss"
+    "./bhagavadgita-chapters.component.css",
+    "../bhagavadgita.component.css"
   ]
 })
 export class BhagavadGitaChaptersComponent {

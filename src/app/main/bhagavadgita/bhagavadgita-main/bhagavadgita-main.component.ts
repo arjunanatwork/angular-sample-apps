@@ -6,7 +6,7 @@ import { environment } from "src/environments/environment";
 @Component({
   selector: "bhagavadgita-main",
   templateUrl: "./bhagavadgita-main.component.html",
-  styleUrls: ["./bhagavadgita-main.component.scss"]
+  styleUrls: ["./bhagavadgita-main.component.css"]
 })
 export class BhagavadGitaMainComponent implements OnInit {
   title = "This is the Bhagavad Gita Main Component";
