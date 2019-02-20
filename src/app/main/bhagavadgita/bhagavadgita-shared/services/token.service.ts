@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { CookieService } from "ngx-cookie-service";
 
@@ -16,12 +15,7 @@ const tokenEndpoint = environment.bhagavadGitaEndpoints.token;
 
 @Injectable()
 export class TokenService {
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private cookieService: CookieService
-  ) {}
+  constructor(private http: HttpClient, private cookieService: CookieService) {}
 
   obtainAccessToken() {
     let params = new URLSearchParams();
@@ -35,18 +29,17 @@ export class TokenService {
     });
 
     //Make the POST Call
-    this.http
-      .post(tokenEndpoint, params.toString(), { headers: headers })
-      .subscribe(data => this.saveToken(data));
+    return this.http.post(tokenEndpoint, params.toString(), {
+      headers: headers
+    });
   }
 
-  saveToken(tokenData) {
+  saveToken(access_token) {
     this.cookieService.set(
       "access_token",
-      tokenData.access_token,
+      access_token,
       new Date(Date.now() + 5 * 60 * 1000)
     );
-    this.router.navigate(["chapters"], { relativeTo: this.route.parent });
   }
 
   getToken(): string {
