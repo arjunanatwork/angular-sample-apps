@@ -1,0 +1,11 @@
+.card {
+    background-color: hsl(40, 100%, 63%);
+}
+
+.card-header-title {
+    font-family: 'Yatra One', cursive;
+}
+
+.content {
+    font-family: 'Lato', sans-serif;
+}

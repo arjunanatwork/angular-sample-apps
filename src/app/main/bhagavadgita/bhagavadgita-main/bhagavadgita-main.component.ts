@@ -19,18 +19,12 @@ export class BhagavadGitaMainComponent implements OnInit {
 
   ngOnInit() {
     //Obtain the token
-    if (environment.production) {
-      //TODO: Remove when project completed fully
-      this.tokenService.obtainAccessToken().subscribe(
-        (data: any) => {
-          this.tokenService.saveToken(data.access_token);
-          this.router.navigate(["chapters"], { relativeTo: this.route.parent });
-        },
-        err => console.error("No Token Obtained")
-      );
-    } else {
-      this.tokenService.saveToken("vBIHxnNPp0tSSCLGX8nB93Oi5WMhIa");
-      this.router.navigate(["chapters"], { relativeTo: this.route.parent });
-    }
+    this.tokenService.obtainAccessToken().subscribe(
+      (data: any) => {
+        this.tokenService.saveToken(data.access_token);
+        this.router.navigate(["chapters"], { relativeTo: this.route.parent });
+      },
+      err => console.error("No Token Obtained")
+    );
   }
 }

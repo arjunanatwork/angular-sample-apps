@@ -1,16 +1,19 @@
-<div class="columns">
-    <div class="column is-two-fifths">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">
-                    Arjuna Visada Yoga
-                </p>
-            </header>
-            <div class="card-content">
-                <div class="content">
-                    Arjuna's Dilemma
-                </div>
-            </div>
+<div class="title has-text-centered	">
+  Chapters
+</div>
+<div class="columns is-multiline">
+  <div class="column is-one-third" *ngFor="let chapter of (chapters | async)">
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          Chapter {{ chapter.chapter_number }}: {{ chapter.name_translation }}
+        </p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          {{ chapter.name_meaning }}
         </div>
+      </div>
     </div>
+  </div>
 </div>

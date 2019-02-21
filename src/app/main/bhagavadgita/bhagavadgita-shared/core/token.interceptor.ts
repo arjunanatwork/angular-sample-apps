@@ -31,16 +31,6 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(req).do(
-      () => {},
-      (error: any) => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.status === 401) {
-            console.log("401 Logged");
-            this.tokenService.obtainAccessToken();
-          }
-        }
-      }
-    );
+    return next.handle(req);
   }
 }
