@@ -19,6 +19,7 @@ export class BhagavadGitaChapterComponent implements OnInit {
   title = "This is the BhagavadGita Chapter Component";
   currentChapterNumber: number;
   chapterDetails: Chapter;
+  totalVerseCount: number;
   verses: Observable<Verse[]>;
   p: number = 1;
 
@@ -44,6 +45,7 @@ export class BhagavadGitaChapterComponent implements OnInit {
     this.bgService.getChapter(chapterNumber).subscribe((data: Chapter) => {
       this.showChapterSpinner = false;
       this.chapterDetails = data;
+      this.totalVerseCount = data.verses_count;
     });
   }
 
@@ -60,7 +62,8 @@ export class BhagavadGitaChapterComponent implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: {
         chapterNumber: this.currentChapterNumber.toString(),
-        verseNumber: verseNumber
+        verseNumber: verseNumber,
+        totalVerseCount: this.totalVerseCount
       },
       relativeTo: this.route.parent
     };

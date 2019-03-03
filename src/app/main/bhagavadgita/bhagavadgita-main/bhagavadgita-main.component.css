@@ -9,6 +9,7 @@ img.brand {
 }
 
 img.brand:hover {
+    cursor: pointer;
     -webkit-filter: drop-shadow(6px 6px 6px #333);
     filter: drop-shadow(6px 6px 6px #333);
     -webkit-transition: all 200ms ease-in-out;

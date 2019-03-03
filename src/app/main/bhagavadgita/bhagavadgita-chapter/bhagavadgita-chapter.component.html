@@ -5,6 +5,23 @@
     <h2 class="subtitle  has-text-centered">{{chapterDetails?.name_meaning }}</h2>
     <p>{{chapterDetails?.chapter_summary}}</p>
     <h3 class="subtitle has-text-centered">Verses</h3>
+
+    <div class="field is-grouped is-grouped-centered">
+        <p class="control" style="padding-top: 0.375rem;">
+            <strong>Choose Verse</strong>
+        </p>
+        <div class="control">
+            <div class="select">
+                <select (change)="navigateToVerse($event.target.value)">
+                    <option>Select dropdown</option>
+                    <option *ngFor="let verse of (verses | async)" [value]="verse.verse_number">Verse
+                        {{verse.verse_number}}</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
     <hr class="verse-divider">
     <loading-spinner *ngIf="showVerseSpinner"></loading-spinner>
     <div class="columns is-multiline">
@@ -20,7 +37,8 @@
                         {{verse.meaning}}
                     </div>
                     <div class="buttons has-addons is-centered">
-                        <span class="button is-rounded" (click)="navigateToVerse(verse.verse_number)">Open Verse</span>
+                        <span class="button is-rounded open-verse" (click)="navigateToVerse(verse.verse_number)">Open
+                            Verse</span>
                     </div>
                 </div>
             </div>

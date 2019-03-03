@@ -17,7 +17,7 @@ export class BhagavadGitaChaptersComponent implements OnInit {
   title = "This is the Bhagavad Gita Chapters Component";
   chapters: Observable<Chapter[]>;
   showSpinner: boolean = true;
-
+  isActive: boolean = false;
   constructor(
     private bgService: BhagavadGitaService,
     private router: Router,

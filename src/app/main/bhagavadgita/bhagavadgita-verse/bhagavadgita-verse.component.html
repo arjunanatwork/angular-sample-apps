@@ -3,6 +3,25 @@
     <div class="content">
         <h2 class="verse-title has-text-centered">Chapter {{chapterNumber}} - Verse {{verseNumber}}</h2>
         <hr class="verse-divider" style="background-color: black;">
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item">
+                    <span class="icon" *ngIf="!hideLeftIcon" (click)="getVerseDetails(chapterNumber, verseNumber - 1)">
+                        <i class="fas fa-lg	 fa-arrow-left"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="level-right">
+                <div class="level-item">
+                    <span class="icon" *ngIf="!hideRightIcon" (click)="getVerseDetails(chapterNumber, verseNumber + 1)">
+                        <i class="fas fa-lg	 fa-arrow-right"></i>
+                    </span>
+                </div>
+            </div>
+        </nav>
+
+
         <p class="verse-text has-text-centered">
             <strong>
                 {{verseDetails?.text}}

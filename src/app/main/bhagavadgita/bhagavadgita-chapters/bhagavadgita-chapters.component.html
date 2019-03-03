@@ -1,6 +1,25 @@
-<div class="title has-text-centered	">
+<div class="title has-text-centered">
   Chapters
 </div>
+<hr class="verse-divider">
+
+<div class="field is-grouped is-grouped-centered">
+  <p class="control" style="padding-top: 0.375rem;">
+    <strong>Choose Chapter</strong>
+  </p>
+  <div class="control">
+    <div class="select">
+      <select (change)="navigateToChapter($event.target.value)">
+        <option>Select dropdown</option>
+        <option *ngFor="let chapter of (chapters | async)" [value]="chapter.chapter_number">
+          Chapter {{chapter.chapter_number}}
+        </option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
 <loading-spinner *ngIf="showSpinner"></loading-spinner>
 <div class="columns is-multiline">
   <div class="column is-half" *ngFor="let chapter of (chapters | async)">

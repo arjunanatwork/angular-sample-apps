@@ -19,14 +19,14 @@
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
-.button {
+.button.open-verse {
     background-color: #f80;
     border-color: transparent;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     transition: 200ms ease-in-out;
 }
 
-.button:hover {
+.button.open-verse:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     -webkit-transition: 200ms ease-in-out;
     transition: 200ms ease-in-out;
