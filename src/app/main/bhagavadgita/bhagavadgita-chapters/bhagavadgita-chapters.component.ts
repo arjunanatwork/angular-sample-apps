@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { BhagavadGitaService } from "../bhagavadgita-shared/services/bhagavadgita.service";
 import { Chapter } from "../bhagavadgita-shared/models/chapter.model";
-import { TokenService } from "../bhagavadgita-shared/services/token.service";
 import { Observable } from "rxjs";
 import { of } from "rxjs";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "bhagavadgita-chapters",
-  providers: [BhagavadGitaService],
   templateUrl: "./bhagavadgita-chapters.component.html",
   styleUrls: [
     "./bhagavadgita-chapters.component.css",
@@ -17,33 +16,31 @@ import { of } from "rxjs";
 export class BhagavadGitaChaptersComponent implements OnInit {
   title = "This is the Bhagavad Gita Chapters Component";
   chapters: Observable<Chapter[]>;
+  showSpinner: boolean = true;
+
   constructor(
     private bgService: BhagavadGitaService,
-    private tokenService: TokenService
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
+  //Get Chapters
   getChapters() {
     this.bgService.getChapters().subscribe((data: Chapter[]) => {
+      this.showSpinner = false;
       this.chapters = of(data);
     });
   }
 
-  getChaptersWithNewToken() {
-    this.tokenService.obtainAccessToken().subscribe(
-      (data: any) => {
-        this.tokenService.saveToken(data.access_token);
-        this.getChapters();
-      },
-      err => console.error("No Token Obtained")
-    );
+  //Navigate To Chapter
+  navigateToChapter(chapterNumber: number) {
+    this.router.navigate(["chapters", chapterNumber], {
+      relativeTo: this.route.parent
+    });
   }
 
   ngOnInit() {
     //Check Token
-    if (this.tokenService.checkToken) {
-      this.getChapters();
-    } else {
-      this.getChaptersWithNewToken();
-    }
+    this.getChapters();
   }
 }

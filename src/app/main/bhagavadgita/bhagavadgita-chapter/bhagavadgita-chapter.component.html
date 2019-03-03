@@ -1,0 +1,44 @@
+<div class="content">
+    <loading-spinner *ngIf="showChapterSpinner"></loading-spinner>
+    <h1 class="title has-text-centered is-spaced">Chapter {{chapterDetails?.chapter_number}}:
+        {{chapterDetails?.name_translation}}</h1>
+    <h2 class="subtitle  has-text-centered">{{chapterDetails?.name_meaning }}</h2>
+    <p>{{chapterDetails?.chapter_summary}}</p>
+    <h3 class="subtitle has-text-centered">Verses</h3>
+    <hr class="verse-divider">
+    <loading-spinner *ngIf="showVerseSpinner"></loading-spinner>
+    <div class="columns is-multiline">
+        <div class="column is-one-third" *ngFor="let verse of verses  | async | paginate: { itemsPerPage: 9, currentPage: p }">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        Verse {{verse.verse_number}}
+                    </p>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                        {{verse.meaning}}
+                    </div>
+                    <div class="buttons has-addons is-centered">
+                        <span class="button is-rounded" (click)="navigateToVerse(verse.verse_number)">Open Verse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-------------Pagination Controls ----------->
+<pagination-template #pT="paginationApi" (pageChange)="p = $event">
+    <nav class="pagination" role="navigation" aria-label="pagination">
+        <a class="pagination-previous" title="This is the first page" [class.disabled]="pT.isFirstPage()" *ngIf="!pT.isFirstPage()"
+            (click)="pT.previous()">Previous</a>
+        <a class="pagination-next" [class.disabled]="pT.isLastPage()" *ngIf="!pT.isLastPage()" (click)="pT.next()">Next
+            page</a>
+        <ul class="pagination-list">
+            <li *ngFor="let page of pT.pages" [class.current]="pT.getCurrent() === page.value">
+                <a class="pagination-link" (click)="pT.setCurrent(page.value)" *ngIf="pT.getCurrent() !== page.value">{{page.label}}</a>
+                <a class="pagination-link is-current" *ngIf="pT.getCurrent() === page.value">{{ page.label }}</a>
+            </li>
+        </ul>
+    </nav>
+</pagination-template>

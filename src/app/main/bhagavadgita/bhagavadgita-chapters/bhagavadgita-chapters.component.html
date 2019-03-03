@@ -1,9 +1,10 @@
 <div class="title has-text-centered	">
   Chapters
 </div>
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
 <div class="columns is-multiline">
-  <div class="column is-one-third" *ngFor="let chapter of (chapters | async)">
-    <div class="card">
+  <div class="column is-half" *ngFor="let chapter of (chapters | async)">
+    <div class="card" (click)="navigateToChapter(chapter.chapter_number)">
       <header class="card-header">
         <p class="card-header-title">
           Chapter {{ chapter.chapter_number }}: {{ chapter.name_translation }}

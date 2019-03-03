@@ -1,0 +1,27 @@
+<loading-spinner *ngIf="showSpinner"></loading-spinner>
+<div class="box" *ngIf="!showSpinner">
+    <div class="content">
+        <h2 class="verse-title has-text-centered">Chapter {{chapterNumber}} - Verse {{verseNumber}}</h2>
+        <hr class="verse-divider" style="background-color: black;">
+        <p class="verse-text has-text-centered">
+            <strong>
+                {{verseDetails?.text}}
+            </strong>
+        </p>
+        <br>
+        <h4 class="verse-title has-text-centered" style="text-decoration: underline">Transliteration</h4>
+        <p class="verse-text has-text-centered">
+            <strong>{{verseDetails?.transliteration}}</strong>
+        </p>
+        <br>
+        <h4 class="verse-title has-text-centered" style="text-decoration: underline">Word Meaning</h4>
+        <p class="verse-text has-text-centered">
+            <strong>{{verseDetails?.word_meanings}}</strong>
+        </p>
+        <br>
+        <h4 class="verse-title has-text-centered" style="text-decoration: underline">Transalation</h4>
+        <p class="verse-text has-text-centered">
+            <strong>{{verseDetails?.meaning}}</strong>
+        </p>
+    </div>
+</div>

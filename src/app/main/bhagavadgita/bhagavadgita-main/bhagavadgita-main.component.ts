@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { TokenService } from "../bhagavadgita-shared/services/token.service";
 import { environment } from "src/environments/environment";
 
@@ -8,23 +8,36 @@ import { environment } from "src/environments/environment";
   templateUrl: "./bhagavadgita-main.component.html",
   styleUrls: ["./bhagavadgita-main.component.css"]
 })
-export class BhagavadGitaMainComponent implements OnInit {
+export class BhagavadGitaMainComponent implements OnDestroy {
   title = "This is the Bhagavad Gita Main Component";
+
+  routerEvent;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private tokenService: TokenService
-  ) {}
+  ) {
+    this.routerEvent = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e.url === "/bhagavadgita" && e instanceof NavigationEnd) {
+        this.getTokenAndNavigate();
+      }
+    });
+  }
 
-  ngOnInit() {
-    //Obtain the token
-    this.tokenService.obtainAccessToken().subscribe(
-      (data: any) => {
+  getTokenAndNavigate() {
+    if (!this.tokenService.checkToken()) {
+      this.tokenService.obtainAccessToken().subscribe((data: any) => {
         this.tokenService.saveToken(data.access_token);
         this.router.navigate(["chapters"], { relativeTo: this.route.parent });
-      },
-      err => console.error("No Token Obtained")
-    );
+      });
+    } else {
+      this.router.navigate(["chapters"], { relativeTo: this.route.parent });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routerEvent.unsubscribe();
   }
 }
