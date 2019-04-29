@@ -1,13 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  Renderer2
-} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HackerNewsApiService } from "../hackernews-shared/services/hackernews-api.service";
-import { FeedItem } from "../hackernews-shared/models/feedItem.model";
+import { FeedItem } from "../hackernews-shared/models/feeditem.model";
 
 @Component({
   selector: "hackernews-feed",
