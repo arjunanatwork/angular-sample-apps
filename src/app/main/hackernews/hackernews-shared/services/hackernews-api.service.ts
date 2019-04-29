@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { FeedItem, FeedItemAdapter } from "../models/feedItem.model";
+import { FeedItem, FeedItemAdapter } from "../models/feeditem.model";
 import { environment } from "src/environments/environment";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
-import { User, UserAdapter } from "../models/user.model";
-import { ItemAdapter, Item } from "../models/item.model";
+import { UserAdapter } from "../models/user.model";
+import { ItemAdapter } from "../models/item.model";
 
 const apiBaseUrl = environment.hackerNewsApiBaseUrl;
 
