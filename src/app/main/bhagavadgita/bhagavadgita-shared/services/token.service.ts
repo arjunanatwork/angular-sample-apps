@@ -50,4 +50,8 @@ export class TokenService {
     const cookieExists: boolean = this.cookieService.check("access_token");
     return cookieExists;
   }
+
+  deleteToken() {
+    this.cookieService.delete("access_token");
+  }
 }

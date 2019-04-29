@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpRequest,
   HttpErrorResponse,
-  HttpEvent
+  HttpEvent,
+  HttpResponse
 } from "@angular/common/http";
 import { TokenService } from "../services/token.service";
 import { Observable } from "rxjs";
@@ -31,6 +32,24 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     });
 
-    return next.handle(req);
+    return next.handle(req).do(
+      (event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          console.log("Success reponse");
+        }
+      },
+      (err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            console.log("Token may be Expired. Calling Token Service");
+            this.tokenService.obtainAccessToken().subscribe((data: any) => {
+              this.tokenService.deleteToken();
+              this.tokenService.saveToken(data.access_token);
+              return next.handle(req);
+            });
+          }
+        }
+      }
+    );
   }
 }

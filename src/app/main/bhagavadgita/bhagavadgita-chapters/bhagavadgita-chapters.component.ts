@@ -4,6 +4,7 @@ import { Chapter } from "../bhagavadgita-shared/models/chapter.model";
 import { Observable } from "rxjs";
 import { of } from "rxjs";
 import { Router, ActivatedRoute } from "@angular/router";
+import { TokenService } from "../bhagavadgita-shared/services/token.service";
 
 @Component({
   selector: "bhagavadgita-chapters",
@@ -21,15 +22,27 @@ export class BhagavadGitaChaptersComponent implements OnInit {
   constructor(
     private bgService: BhagavadGitaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenService: TokenService
   ) {}
 
   //Get Chapters
   getChapters() {
-    this.bgService.getChapters().subscribe((data: Chapter[]) => {
-      this.showSpinner = false;
-      this.chapters = of(data);
-    });
+    this.bgService.getChapters().subscribe(
+      (data: Chapter[]) => {
+        this.showSpinner = false;
+        this.chapters = of(data);
+      },
+      error => {
+        if (error.status == 401) {
+          this.tokenService.obtainAccessToken().subscribe((data: any) => {
+            this.tokenService.deleteToken();
+            this.tokenService.saveToken(data.access_token);
+            this.getChapters();
+          });
+        }
+      }
+    );
   }
 
   //Navigate To Chapter

@@ -6,6 +6,7 @@ import { Verse } from "../bhagavadgita-shared/models/verse.model";
 import { Observable } from "rxjs";
 import { of } from "rxjs";
 import { PaginationInstance } from "ngx-pagination";
+import { TokenService } from "../bhagavadgita-shared/services/token.service";
 
 @Component({
   selector: "bhagavadgita-chapter",
@@ -29,7 +30,8 @@ export class BhagavadGitaChapterComponent implements OnInit {
   constructor(
     private bgService: BhagavadGitaService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenService: TokenService
   ) {}
 
   //Get Chapter Details and All Verses of the Chapter
@@ -42,20 +44,40 @@ export class BhagavadGitaChapterComponent implements OnInit {
   }
 
   getChapterInfo(chapterNumber: number) {
-    this.bgService.getChapter(chapterNumber).subscribe((data: Chapter) => {
-      this.showChapterSpinner = false;
-      this.chapterDetails = data;
-      this.totalVerseCount = data.verses_count;
-    });
+    this.bgService.getChapter(chapterNumber).subscribe(
+      (data: Chapter) => {
+        this.showChapterSpinner = false;
+        this.chapterDetails = data;
+        this.totalVerseCount = data.verses_count;
+      },
+      error => {
+        if (error.status == 401) {
+          this.tokenService.obtainAccessToken().subscribe((data: any) => {
+            this.tokenService.deleteToken();
+            this.tokenService.saveToken(data.access_token);
+            this.getChapterInfo(this.currentChapterNumber);
+          });
+        }
+      }
+    );
   }
 
   getChapterVerses(chapterNumber: number) {
-    this.bgService
-      .getVersesForChapter(chapterNumber)
-      .subscribe((data: Verse[]) => {
+    this.bgService.getVersesForChapter(chapterNumber).subscribe(
+      (data: Verse[]) => {
         this.showVerseSpinner = false;
         this.verses = of(data);
-      });
+      },
+      error => {
+        if (error.status == 401) {
+          this.tokenService.obtainAccessToken().subscribe((data: any) => {
+            this.tokenService.deleteToken();
+            this.tokenService.saveToken(data.access_token);
+            this.getChapterVerses(this.currentChapterNumber);
+          });
+        }
+      }
+    );
   }
 
   navigateToVerse(verseNumber: string) {

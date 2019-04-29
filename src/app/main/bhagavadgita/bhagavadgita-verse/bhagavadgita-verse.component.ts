@@ -5,6 +5,7 @@ import { BhagavadGitaService } from "../bhagavadgita-shared/services/bhagavadgit
 import { Verse } from "../bhagavadgita-shared/models/verse.model";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { TokenService } from "../bhagavadgita-shared/services/token.service";
 
 @Component({
   selector: "bhagavadgita-verse",
@@ -29,25 +30,37 @@ export class BhagavadGitaVerseComponent implements OnInit {
 
   constructor(
     private bgService: BhagavadGitaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private tokenService: TokenService
   ) {}
 
   getVerseDetails(chapNum: number, verseNum: number) {
     let verseNumber = verseNum.toString();
-    this.bgService.getVerse(chapNum, verseNumber).subscribe(data => {
-      this.showSpinner = false;
-      this.hideLeftIcon = false;
-      this.hideRightIcon = false;
+    this.bgService.getVerse(chapNum, verseNumber).subscribe(
+      data => {
+        this.showSpinner = false;
+        this.hideLeftIcon = false;
+        this.hideRightIcon = false;
 
-      this.verseNumber = Number(data.verse_number);
-      let index = this.totalVerseCount.indexOf(Number(this.verseNumber));
-      if (index == 0) {
-        this.hideLeftIcon = true;
-      } else if (index == this.totalVerseCount.length - 1) {
-        this.hideRightIcon = true;
+        this.verseNumber = Number(data.verse_number);
+        let index = this.totalVerseCount.indexOf(Number(this.verseNumber));
+        if (index == 0) {
+          this.hideLeftIcon = true;
+        } else if (index == this.totalVerseCount.length - 1) {
+          this.hideRightIcon = true;
+        }
+        this.verseDetails = data;
+      },
+      error => {
+        if (error.status == 401) {
+          this.tokenService.obtainAccessToken().subscribe((data: any) => {
+            this.tokenService.deleteToken();
+            this.tokenService.saveToken(data.access_token);
+            this.getVerseDetails(this.chapterNumber, this.verseNumber);
+          });
+        }
       }
-      this.verseDetails = data;
-    });
+    );
   }
 
   ngOnInit() {
