@@ -11,6 +11,8 @@ import { AppRoutingModule } from "./app-routing.module";
 import { HeaderComponent } from "./header/header.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { MainComponent } from "./main/main.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { MainComponent } from "./main/main.component";
       positionClass: "toast-bottom-center",
       preventDuplicates: true
     }),
-    DeviceDetectorModule.forRoot()
+    DeviceDetectorModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
