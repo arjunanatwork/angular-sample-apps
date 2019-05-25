@@ -1,22 +1,22 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: "trello-clone",
-    loadChildren: "./main/boards/board.module#BoardModule"
+    path: 'trello-clone',
+    loadChildren: './main/boards/board.module#BoardModule'
   },
   {
-    path: "hackernews",
-    loadChildren: "./main/hackernews/hackernews.module#HackerNewsModule"
+    path: 'hackernews',
+    loadChildren: './main/hackernews/hackernews.module#HackerNewsModule'
   },
   {
-    path: "pokedex",
-    loadChildren: "./main/pokedex/pokedex.module#PokedexModule"
+    path: 'pokedex',
+    loadChildren: './main/pokedex/pokedex.module#PokedexModule'
   },
   {
-    path: "bhagavadgita",
-    loadChildren: "./main/bhagavadgita/bhagavadgita.module#BhagavadGitaModule"
+    path: 'bhagavadgita',
+    loadChildren: './main/bhagavadgita/bhagavadgita.module#BhagavadGitaModule'
   }
 ];
 
