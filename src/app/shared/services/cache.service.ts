@@ -8,7 +8,7 @@ export class CacheService {
   public responseCache = new Map();
 
   getResponsefromCache(data: string) {
-    let cacheData = this.responseCache.get(data);
+    const cacheData = this.responseCache.get(data);
     if (cacheData) {
       return of(cacheData);
     }
