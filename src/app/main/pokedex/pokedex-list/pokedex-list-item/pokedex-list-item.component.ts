@@ -1,10 +1,10 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Pokemon } from "../../pokedex-shared/models/pokemon.model";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Pokemon } from '../../pokedex-shared/models/pokemon.model';
 
 @Component({
-  selector: "pokedex-list-item",
-  templateUrl: "./pokedex-list-item.component.html",
-  styleUrls: ["./pokedex-list-item.component.css"]
+  selector: 'pokedex-list-item',
+  templateUrl: './pokedex-list-item.component.html',
+  styleUrls: ['./pokedex-list-item.component.css']
 })
 export class PokedexListItemComponent {
   @Input() pokemon: Pokemon;
@@ -19,5 +19,5 @@ export class PokedexListItemComponent {
   }
   @Output() isActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  title = "This is the Pokedex Main Component";
+  title = 'This is the Pokedex Main Component';
 }

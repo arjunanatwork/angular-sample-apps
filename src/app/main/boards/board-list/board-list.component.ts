@@ -1,22 +1,22 @@
-import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
-import { Board } from "../board-shared/models/board.model";
-import { BoardListService } from "../board-shared/services/board-list.service";
+import { Board } from '../board-shared/models/board.model';
+import { BoardListService } from '../board-shared/services/board-list.service';
 
 @Component({
-  selector: "board-list",
+  selector: 'board-list',
   providers: [BoardListService],
-  templateUrl: "./board-list.component.html",
-  styleUrls: ["./board-list.component.css"]
+  templateUrl: './board-list.component.html',
+  styleUrls: ['./board-list.component.css']
 })
 export class BoardListComponent implements OnInit {
-  title = "Trello Clone";
+  title = 'Trello Clone';
   showCreateBoard = false;
   boardList: Board[] = [];
 
-  @ViewChild("boardName") boardName: ElementRef;
+  @ViewChild('boardName') boardName: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,21 +34,21 @@ export class BoardListComponent implements OnInit {
     this.boardList = this.boardList || [];
     this.boardList.push(board);
     this.boardListService.saveBoard(board);
-    this.toastr.success("Board " + board.name + " has been created", "", {
-      toastClass: "toast has-background-success	"
+    this.toastr.success('Board ' + board.name + ' has been created', '', {
+      toastClass: 'toast has-background-success	'
     });
   }
 
   deleteBoard(boardId: number) {
     this.boardListService.deleteBoard(boardId);
-    this.toastr.info("Board has been deleted", "", {
-      toastClass: "toast has-background-info"
+    this.toastr.info('Board has been deleted', '', {
+      toastClass: 'toast has-background-info'
     });
     this.getBoardData();
   }
 
   onBoardSelect(board: Board) {
-    this.router.navigate(["board", board.id], { relativeTo: this.route });
+    this.router.navigate(['board', board.id], { relativeTo: this.route });
   }
 
   getBoardDataFromStore() {

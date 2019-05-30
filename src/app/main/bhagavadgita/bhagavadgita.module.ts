@@ -1,18 +1,18 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { CookieService } from "ngx-cookie-service";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
-import { HttpClientModule } from "@angular/common/http";
-import { NgxPaginationModule } from "ngx-pagination";
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
-import { BhagavadGitaRoutingModule } from "./bhagavadgita-routing.module";
-import { BhagavadGitaMainComponent } from "./bhagavadgita-main/bhagavadgita-main.component";
-import { BhagavadGitaChaptersComponent } from "./bhagavadgita-chapters/bhagavadgita-chapters.component";
-import { TokenService } from "./bhagavadgita-shared/services/token.service";
-import { BhagavadGitaChapterComponent } from "./bhagavadgita-chapter/bhagavadgita-chapter.component";
-import { BhagavadGitaService } from "./bhagavadgita-shared/services/bhagavadgita.service";
-import { BhagavadGitaVerseComponent } from "./bhagavadgita-verse/bhagavadgita-verse.component";
-import { LoadingSpinnerComponent } from "src/app/shared/ui/loading-spinner/loading-spinner.component";
+import { BhagavadGitaRoutingModule } from './bhagavadgita-routing.module';
+import { BhagavadGitaMainComponent } from './bhagavadgita-main/bhagavadgita-main.component';
+import { BhagavadGitaChaptersComponent } from './bhagavadgita-chapters/bhagavadgita-chapters.component';
+import { TokenService } from './bhagavadgita-shared/services/token.service';
+import { BhagavadGitaChapterComponent } from './bhagavadgita-chapter/bhagavadgita-chapter.component';
+import { BhagavadGitaService } from './bhagavadgita-shared/services/bhagavadgita.service';
+import { BhagavadGitaVerseComponent } from './bhagavadgita-verse/bhagavadgita-verse.component';
+import { LoadingSpinnerComponent } from 'src/app/shared/ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [

@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "../core/adapter";
+import { Injectable } from '@angular/core';
+import { Adapter } from '../core/adapter';
 
 export class User {
   constructor(
@@ -13,11 +13,11 @@ export class User {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class UserAdapter implements Adapter<User> {
   adapt(item: any): User {
-    let user = new User(
+    const user = new User(
       item.id,
       item.created_time,
       item.created,

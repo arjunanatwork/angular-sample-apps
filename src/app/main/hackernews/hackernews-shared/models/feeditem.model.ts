@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "../core/adapter";
+import { Injectable } from '@angular/core';
+import { Adapter } from '../core/adapter';
 
 export class FeedItem {
   constructor(
@@ -17,11 +17,11 @@ export class FeedItem {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class FeedItemAdapter implements Adapter<FeedItem> {
   adapt(item: any): FeedItem {
-    let feedItem = new FeedItem(
+    const feedItem = new FeedItem(
       item.id,
       item.title,
       item.points,

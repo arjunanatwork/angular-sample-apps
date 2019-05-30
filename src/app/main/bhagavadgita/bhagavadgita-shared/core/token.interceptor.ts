@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpInterceptor,
   HttpHandler,
@@ -6,12 +6,12 @@ import {
   HttpErrorResponse,
   HttpEvent,
   HttpResponse
-} from "@angular/common/http";
-import { TokenService } from "../services/token.service";
-import { Observable } from "rxjs";
-import "rxjs/add/operator/do";
+} from '@angular/common/http';
+import { TokenService } from '../services/token.service';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/do';
 
-const InterceptorSkipHeader = "X-Skip-Interceptor";
+const InterceptorSkipHeader = 'X-Skip-Interceptor';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -35,13 +35,13 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(req).do(
       (event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-          console.log("Success reponse");
+          console.log('Success reponse');
         }
       },
       (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
-            console.log("Token may be Expired. Calling Token Service");
+            console.log('Token may be Expired. Calling Token Service');
             this.tokenService.obtainAccessToken().subscribe((data: any) => {
               this.tokenService.deleteToken();
               this.tokenService.saveToken(data.access_token);

@@ -1,51 +1,51 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { HackerNewsMainComponent } from "./hackernews-main/hackernews-main.component";
-import { HackerNewsFeedComponent } from "./hackernews-feed/hackernews-feed.component";
-import { HackerNewsUserComponent } from "./hackernews-user/hackernews-user.component";
-import { HackerNewsItemComponent } from "./hackernews-item/hackernews-item.component";
+import { HackerNewsMainComponent } from './hackernews-main/hackernews-main.component';
+import { HackerNewsFeedComponent } from './hackernews-feed/hackernews-feed.component';
+import { HackerNewsUserComponent } from './hackernews-user/hackernews-user.component';
+import { HackerNewsItemComponent } from './hackernews-item/hackernews-item.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: HackerNewsMainComponent,
     children: [
-      { path: "", redirectTo: "news", pathMatch: "full" },
+      { path: '', redirectTo: 'news', pathMatch: 'full' },
       {
-        path: "news",
+        path: 'news',
         component: HackerNewsFeedComponent,
-        data: { feedType: "news" }
+        data: { feedType: 'news' }
       },
       {
-        path: "newest",
+        path: 'newest',
         component: HackerNewsFeedComponent,
-        data: { feedType: "newest" }
+        data: { feedType: 'newest' }
       },
       {
-        path: "ask",
+        path: 'ask',
         component: HackerNewsFeedComponent,
-        data: { feedType: "ask" }
+        data: { feedType: 'ask' }
       },
       {
-        path: "show",
+        path: 'show',
         component: HackerNewsFeedComponent,
-        data: { feedType: "show" }
+        data: { feedType: 'show' }
       },
       {
-        path: "jobs",
+        path: 'jobs',
         component: HackerNewsFeedComponent,
-        data: { feedType: "jobs" }
+        data: { feedType: 'jobs' }
       },
       {
-        path: "user/:id",
+        path: 'user/:id',
         component: HackerNewsUserComponent,
-        data: { feedType: "user" }
+        data: { feedType: 'user' }
       },
       {
-        path: "item/:id",
+        path: 'item/:id',
         component: HackerNewsItemComponent,
-        data: { feedType: "item" }
+        data: { feedType: 'item' }
       }
     ]
   }

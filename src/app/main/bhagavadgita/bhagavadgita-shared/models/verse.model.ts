@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "../core/adapter";
+import { Injectable } from '@angular/core';
+import { Adapter } from '../core/adapter';
 
 export class Verse {
   constructor(
@@ -12,11 +12,11 @@ export class Verse {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class VerseAdapter implements Adapter<Verse> {
   adapt(item: any): Verse {
-    let chapter = new Verse(
+    const chapter = new Verse(
       item.meaning,
       item.text,
       item.transliteration,

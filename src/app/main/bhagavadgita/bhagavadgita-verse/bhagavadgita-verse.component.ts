@@ -1,22 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { BhagavadGitaService } from "../bhagavadgita-shared/services/bhagavadgita.service";
-import { Verse } from "../bhagavadgita-shared/models/verse.model";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { TokenService } from "../bhagavadgita-shared/services/token.service";
+import { BhagavadGitaService } from '../bhagavadgita-shared/services/bhagavadgita.service';
+import { Verse } from '../bhagavadgita-shared/models/verse.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TokenService } from '../bhagavadgita-shared/services/token.service';
 
 @Component({
-  selector: "bhagavadgita-verse",
-  templateUrl: "./bhagavadgita-verse.component.html",
+  selector: 'bhagavadgita-verse',
+  templateUrl: './bhagavadgita-verse.component.html',
   styleUrls: [
-    "./bhagavadgita-verse.component.css",
-    "../bhagavadgita.component.css"
+    './bhagavadgita-verse.component.css',
+    '../bhagavadgita.component.css'
   ]
 })
 export class BhagavadGitaVerseComponent implements OnInit {
-  title = "This is the BhagavadGita Verse Component";
+  title = 'This is the BhagavadGita Verse Component';
   chapterNumber: number;
   verseNumber: number;
   totalVerseCount: number[];
@@ -24,9 +24,9 @@ export class BhagavadGitaVerseComponent implements OnInit {
   verseDetails: Verse;
   state$: Observable<object>;
 
-  showSpinner: boolean = true;
-  hideLeftIcon: boolean = false;
-  hideRightIcon: boolean = false;
+  showSpinner = true;
+  hideLeftIcon = false;
+  hideRightIcon = false;
 
   constructor(
     private bgService: BhagavadGitaService,

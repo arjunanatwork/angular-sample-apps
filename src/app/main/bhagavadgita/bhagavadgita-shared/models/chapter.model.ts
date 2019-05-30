@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "../core/adapter";
+import { Injectable } from '@angular/core';
+import { Adapter } from '../core/adapter';
 
 export class Chapter {
   constructor(
@@ -14,11 +14,11 @@ export class Chapter {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class ChapterAdapter implements Adapter<Chapter> {
   adapt(item: any): Chapter {
-    let chapter = new Chapter(
+    const chapter = new Chapter(
       item.chapter_number,
       item.chapter_summary,
       item.name,

@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { ChapterAdapter, Chapter } from "../models/chapter.model";
-import { environment } from "src/environments/environment";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { map, catchError } from "rxjs/operators";
-import { Observable } from "rxjs";
-import { CacheService } from "src/app/shared/services/cache.service";
-import { VerseAdapter, Verse } from "../models/verse.model";
-import { TokenService } from "./token.service";
+import { Injectable } from '@angular/core';
+import { ChapterAdapter, Chapter } from '../models/chapter.model';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { CacheService } from 'src/app/shared/services/cache.service';
+import { VerseAdapter, Verse } from '../models/verse.model';
+import { TokenService } from './token.service';
 
 const bhagavadGitaApiURL = environment.bhagavadGitaEndpoints.api;
 
@@ -22,23 +22,23 @@ export class BhagavadGitaService {
 
   createAuthorizationHeader(headers: HttpHeaders) {
     headers = headers.set(
-      "Authorization",
-      "Bearer " + this.tokenService.getToken()
+      'Authorization',
+      'Bearer ' + this.tokenService.getToken()
     );
     return headers;
   }
 
-  //Get All Chapters from API
+  // Get All Chapters from API
   getChapters(): Observable<Chapter[]> {
-    const url = bhagavadGitaApiURL + "chapters";
+    const url = bhagavadGitaApiURL + 'chapters';
     let headers = new HttpHeaders();
     headers = this.createAuthorizationHeader(headers);
     let chaptersFromCache = this.checkCacheData(url);
     if (chaptersFromCache) {
-      console.log("Data returned from Cache");
+      console.log('Data returned from Cache');
       return chaptersFromCache;
     }
-    console.log("No Data returned from Cache, calling API");
+    console.log('No Data returned from Cache, calling API');
     return this.http
       .get(url, { headers: headers })
       .pipe(
@@ -47,7 +47,7 @@ export class BhagavadGitaService {
   }
 
   getChapter(chapterNumber: number): Observable<Chapter> {
-    const url = bhagavadGitaApiURL + "chapters/" + chapterNumber;
+    const url = bhagavadGitaApiURL + 'chapters/' + chapterNumber;
     let headers = new HttpHeaders();
     headers = this.createAuthorizationHeader(headers);
     return this.http
@@ -56,7 +56,7 @@ export class BhagavadGitaService {
   }
 
   getVersesForChapter(chapterNumber: number): Observable<Verse[]> {
-    const url = bhagavadGitaApiURL + "chapters/" + chapterNumber + "/verses";
+    const url = bhagavadGitaApiURL + 'chapters/' + chapterNumber + '/verses';
     let headers = new HttpHeaders();
     headers = this.createAuthorizationHeader(headers);
     return this.http
@@ -69,9 +69,9 @@ export class BhagavadGitaService {
   getVerse(chapterNumber: number, verseNumber: string): Observable<Verse> {
     const url =
       bhagavadGitaApiURL +
-      "chapters/" +
+      'chapters/' +
       chapterNumber +
-      "/verses/" +
+      '/verses/' +
       verseNumber;
     let headers = new HttpHeaders();
     headers = this.createAuthorizationHeader(headers);

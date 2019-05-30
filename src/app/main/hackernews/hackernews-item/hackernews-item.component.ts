@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { HackerNewsApiService } from "../hackernews-shared/services/hackernews-api.service";
-import { Item } from "../hackernews-shared/models/item.model";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HackerNewsApiService } from '../hackernews-shared/services/hackernews-api.service';
+import { Item } from '../hackernews-shared/models/item.model';
 
 @Component({
-  selector: "hackernews-item",
+  selector: 'hackernews-item',
   providers: [HackerNewsApiService],
-  templateUrl: "./hackernews-item.component.html",
-  styleUrls: ["./hackernews-item.component.css"]
+  templateUrl: './hackernews-item.component.html',
+  styleUrls: ['./hackernews-item.component.css']
 })
 export class HackerNewsItemComponent implements OnInit {
-  title = "This is the Item Component";
+  title = 'This is the Item Component';
   feedType: string;
   itemInfo: Item;
 
@@ -20,14 +20,14 @@ export class HackerNewsItemComponent implements OnInit {
   ) {}
 
   getItemInfo() {
-    const id = this.route.snapshot.paramMap.get("id");
+    const id = this.route.snapshot.paramMap.get('id');
     this.hackerNewsApi
       .getFeedDetails(id, this.feedType)
       .subscribe((data: Item) => (this.itemInfo = data));
   }
 
   ngOnInit() {
-    this.feedType = this.route.snapshot.data["feedType"];
+    this.feedType = this.route.snapshot.data['feedType'];
     this.getItemInfo();
   }
 }

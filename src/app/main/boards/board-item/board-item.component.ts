@@ -1,30 +1,30 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem
-} from "@angular/cdk/drag-drop";
-import { ToastrService } from "ngx-toastr";
+} from '@angular/cdk/drag-drop';
+import { ToastrService } from 'ngx-toastr';
 
-import { Board } from "../board-shared/models/board.model";
-import { List } from "../board-shared/models/list.model";
+import { Board } from '../board-shared/models/board.model';
+import { List } from '../board-shared/models/list.model';
 
-import { BoardItemService } from "../board-shared/services/board-item.service";
-import { Card } from "../board-shared/models/card.model";
+import { BoardItemService } from '../board-shared/services/board-item.service';
+import { Card } from '../board-shared/models/card.model';
 
 @Component({
-  selector: "board-item",
+  selector: 'board-item',
   providers: [BoardItemService],
-  templateUrl: "./board-item.component.html",
-  styleUrls: ["./board-item.component.css"]
+  templateUrl: './board-item.component.html',
+  styleUrls: ['./board-item.component.css']
 })
 export class BoardItemComponent implements OnInit {
   showCreateList = false;
   board: Board;
   listItems: List[] = [];
 
-  @ViewChild("listName") listName: ElementRef;
+  @ViewChild('listName') listName: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class BoardItemComponent implements OnInit {
   ) {}
 
   getBoardInfo(): void {
-    const id = this.route.snapshot.paramMap.get("id");
+    const id = this.route.snapshot.paramMap.get('id');
     this.boardItemService.getBoardInfo(id).then(value => {
       this.board = value;
     });
@@ -48,8 +48,8 @@ export class BoardItemComponent implements OnInit {
     );
     this.board.list.push(list);
     this.boardItemService.saveBoard(this.board);
-    this.toastr.success("List " + list.name + " has been created", "", {
-      toastClass: "toast has-background-success	"
+    this.toastr.success('List ' + list.name + ' has been created', '', {
+      toastClass: 'toast has-background-success	'
     });
   }
 
@@ -58,8 +58,8 @@ export class BoardItemComponent implements OnInit {
     let card = new Card(Math.floor(Math.random() * 1000) + 1, value, false);
     this.board.list.find(x => x.id == listId).cards.push(card);
     this.boardItemService.saveBoard(this.board);
-    this.toastr.success("Card " + card.name + " has been created", "", {
-      toastClass: "toast has-background-success	"
+    this.toastr.success('Card ' + card.name + ' has been created', '', {
+      toastClass: 'toast has-background-success	'
     });
   }
 
@@ -70,8 +70,8 @@ export class BoardItemComponent implements OnInit {
     ].isCompleted = isCompleted;
     this.boardItemService.saveBoard(this.board);
     if (isCompleted) {
-      this.toastr.info("Card has been marked as completed", "", {
-        toastClass: "toast has-background-info"
+      this.toastr.info('Card has been marked as completed', '', {
+        toastClass: 'toast has-background-info'
       });
     }
   }
@@ -80,8 +80,8 @@ export class BoardItemComponent implements OnInit {
     let listIndex = this.board.list.findIndex(i => i.id === listId);
     this.board.list.splice(listIndex, 1);
     this.boardItemService.saveBoard(this.board);
-    this.toastr.info("List has been deleted", "", {
-      toastClass: "toast has-background-info"
+    this.toastr.info('List has been deleted', '', {
+      toastClass: 'toast has-background-info'
     });
   }
 
@@ -89,8 +89,8 @@ export class BoardItemComponent implements OnInit {
     let cardIndex = this.getCardIndex(cardId, listId);
     this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
     this.boardItemService.saveBoard(this.board);
-    this.toastr.info("Card has been deleted", "", {
-      toastClass: "toast has-background-info"
+    this.toastr.info('Card has been deleted', '', {
+      toastClass: 'toast has-background-info'
     });
   }
 

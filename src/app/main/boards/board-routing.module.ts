@@ -1,17 +1,17 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
-import { BoardListComponent } from "./board-list/board-list.component";
-import { BoardMainComponent } from "./board-main/board-main.component";
-import { BoardItemComponent } from "./board-item/board-item.component";
+import { BoardListComponent } from './board-list/board-list.component';
+import { BoardMainComponent } from './board-main/board-main.component';
+import { BoardItemComponent } from './board-item/board-item.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: BoardMainComponent,
     children: [
-      { path: "", component: BoardListComponent },
-      { path: "board/:id", component: BoardItemComponent }
+      { path: '', component: BoardListComponent },
+      { path: 'board/:id', component: BoardItemComponent }
     ]
   }
 ];

@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { Adapter } from "../core/adapter";
+import { Injectable } from '@angular/core';
+import { Adapter } from '../core/adapter';
 
 export class Pokemon {
   constructor(
@@ -27,18 +27,18 @@ export class Ability {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class PokemonAdapter implements Adapter<Pokemon> {
   adapt(feeditem: any): Pokemon {
     let sprites = new Sprites(feeditem.sprites.front_default);
-    //Map types
-    let types = feeditem.types.map(i => new Type(i.type.name, i.type.url));
-    let abilities = feeditem.abilities.map(
+    // Map types
+    const types = feeditem.types.map(i => new Type(i.type.name, i.type.url));
+    const abilities = feeditem.abilities.map(
       i => new Ability(i.ability.name, i.ability.url)
     );
 
-    let item = new Pokemon(
+    const item = new Pokemon(
       feeditem.id,
       feeditem.name,
       feeditem.weight,

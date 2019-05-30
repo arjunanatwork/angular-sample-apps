@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { BhagavadGitaService } from "../bhagavadgita-shared/services/bhagavadgita.service";
-import { Chapter } from "../bhagavadgita-shared/models/chapter.model";
-import { Observable } from "rxjs";
-import { of } from "rxjs";
-import { Router, ActivatedRoute } from "@angular/router";
-import { TokenService } from "../bhagavadgita-shared/services/token.service";
+import { Component, OnInit } from '@angular/core';
+import { BhagavadGitaService } from '../bhagavadgita-shared/services/bhagavadgita.service';
+import { Chapter } from '../bhagavadgita-shared/models/chapter.model';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TokenService } from '../bhagavadgita-shared/services/token.service';
 
 @Component({
-  selector: "bhagavadgita-chapters",
-  templateUrl: "./bhagavadgita-chapters.component.html",
+  selector: 'bhagavadgita-chapters',
+  templateUrl: './bhagavadgita-chapters.component.html',
   styleUrls: [
-    "./bhagavadgita-chapters.component.css",
-    "../bhagavadgita.component.css"
+    './bhagavadgita-chapters.component.css',
+    '../bhagavadgita.component.css'
   ]
 })
 export class BhagavadGitaChaptersComponent implements OnInit {
-  title = "This is the Bhagavad Gita Chapters Component";
+  title = 'This is the Bhagavad Gita Chapters Component';
   chapters: Observable<Chapter[]>;
   showSpinner: boolean = true;
   isActive: boolean = false;
@@ -26,7 +26,7 @@ export class BhagavadGitaChaptersComponent implements OnInit {
     private tokenService: TokenService
   ) {}
 
-  //Get Chapters
+  // Get Chapters
   getChapters() {
     this.bgService.getChapters().subscribe(
       (data: Chapter[]) => {
@@ -45,9 +45,9 @@ export class BhagavadGitaChaptersComponent implements OnInit {
     );
   }
 
-  //Navigate To Chapter
+  // Navigate To Chapter
   navigateToChapter(chapterNumber: number) {
-    this.router.navigate(["chapters", chapterNumber], {
+    this.router.navigate(['chapters', chapterNumber], {
       relativeTo: this.route.parent
     });
   }

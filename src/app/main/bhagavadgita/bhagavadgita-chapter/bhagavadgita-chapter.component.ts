@@ -1,31 +1,29 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
-import { BhagavadGitaService } from "../bhagavadgita-shared/services/bhagavadgita.service";
-import { Chapter } from "../bhagavadgita-shared/models/chapter.model";
-import { Verse } from "../bhagavadgita-shared/models/verse.model";
-import { Observable } from "rxjs";
-import { of } from "rxjs";
-import { PaginationInstance } from "ngx-pagination";
-import { TokenService } from "../bhagavadgita-shared/services/token.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { Chapter } from '../bhagavadgita-shared/models/chapter.model';
+import { Verse } from '../bhagavadgita-shared/models/verse.model';
+import { BhagavadGitaService } from '../bhagavadgita-shared/services/bhagavadgita.service';
+import { TokenService } from '../bhagavadgita-shared/services/token.service';
 
 @Component({
-  selector: "bhagavadgita-chapter",
-  templateUrl: "./bhagavadgita-chapter.component.html",
+  selector: 'bhagavadgita-chapter',
+  templateUrl: './bhagavadgita-chapter.component.html',
   styleUrls: [
-    "./bhagavadgita-chapter.component.css",
-    "../bhagavadgita.component.css"
+    './bhagavadgita-chapter.component.css',
+    '../bhagavadgita.component.css'
   ]
 })
 export class BhagavadGitaChapterComponent implements OnInit {
-  title = "This is the BhagavadGita Chapter Component";
+  title = 'This is the BhagavadGita Chapter Component';
   currentChapterNumber: number;
   chapterDetails: Chapter;
   totalVerseCount: number;
   verses: Observable<Verse[]>;
   p: number = 1;
 
-  showChapterSpinner: boolean = true;
-  showVerseSpinner: boolean = true;
+  showChapterSpinner = true;
+  showVerseSpinner = true;
 
   constructor(
     private bgService: BhagavadGitaService,
@@ -34,12 +32,12 @@ export class BhagavadGitaChapterComponent implements OnInit {
     private tokenService: TokenService
   ) {}
 
-  //Get Chapter Details and All Verses of the Chapter
+  // Get Chapter Details and All Verses of the Chapter
   loadDetails() {
-    this.currentChapterNumber = Number(this.route.snapshot.paramMap.get("id"));
-    //Get Chapter Details
+    this.currentChapterNumber = Number(this.route.snapshot.paramMap.get('id'));
+    // Get Chapter Details
     this.getChapterInfo(this.currentChapterNumber);
-    //Get Verses for a chapter
+    // Get Verses for a chapter
     this.getChapterVerses(this.currentChapterNumber);
   }
 
@@ -90,7 +88,7 @@ export class BhagavadGitaChapterComponent implements OnInit {
       relativeTo: this.route.parent
     };
     this.router.navigate(
-      ["chapters", this.currentChapterNumber, "verse", verseNumber],
+      ['chapters', this.currentChapterNumber, 'verse', verseNumber],
       navigationExtras
     );
   }

@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { of } from "rxjs";
+import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class CacheService {
   public responseCache = new Map();
