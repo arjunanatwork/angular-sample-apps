@@ -16,7 +16,7 @@ export class BoardListComponent implements OnInit {
   showCreateBoard = false;
   boardList: Board[] = [];
 
-  @ViewChild('boardName') boardName: ElementRef;
+  @ViewChild('boardName', { static: false }) boardName: ElementRef;
 
   constructor(
     private route: ActivatedRoute,

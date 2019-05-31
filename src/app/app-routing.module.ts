@@ -5,6 +5,7 @@ const routes: Routes = [
   {
     path: 'trello-clone',
     loadChildren: './main/boards/board.module#BoardModule'
+    //loadChildren: () => import('./main/boards/board.module').then(m => m.BoardModule)
   },
   {
     path: 'hackernews',

@@ -27,7 +27,7 @@ export class PokedexHeaderComponent implements OnInit {
   @Output() typeSelected = new EventEmitter<string>();
   @Output() nameSearch = new EventEmitter<string>();
 
-  @ViewChild('pokemonName') pokemonName: ElementRef;
+  @ViewChild('pokemonName', { static: false }) pokemonName: ElementRef;
 
   constructor(private pokedexService: PokedexService) {}
 

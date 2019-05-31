@@ -24,7 +24,7 @@ export class BoardItemComponent implements OnInit {
   board: Board;
   listItems: List[] = [];
 
-  @ViewChild('listName') listName: ElementRef;
+  @ViewChild('listName', { static: false }) listName: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
