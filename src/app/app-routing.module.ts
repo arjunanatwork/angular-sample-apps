@@ -4,20 +4,27 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'trello-clone',
-    loadChildren: './main/boards/board.module#BoardModule'
-    //loadChildren: () => import('./main/boards/board.module').then(m => m.BoardModule)
+    loadChildren: () =>
+      import('./main/boards/board.module').then(m => m.BoardModule)
   },
   {
     path: 'hackernews',
-    loadChildren: './main/hackernews/hackernews.module#HackerNewsModule'
+    loadChildren: () =>
+      import('./main/hackernews/hackernews.module').then(
+        m => m.HackerNewsModule
+      )
   },
   {
     path: 'pokedex',
-    loadChildren: './main/pokedex/pokedex.module#PokedexModule'
+    loadChildren: () =>
+      import('./main/pokedex/pokedex.module').then(m => m.PokedexModule)
   },
   {
     path: 'bhagavadgita',
-    loadChildren: './main/bhagavadgita/bhagavadgita.module#BhagavadGitaModule'
+    loadChildren: () =>
+      import('./main/bhagavadgita/bhagavadgita.module').then(
+        m => m.BhagavadGitaModule
+      )
   }
 ];
 
