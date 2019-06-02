@@ -17,8 +17,8 @@ import { TokenService } from '../bhagavadgita-shared/services/token.service';
 export class BhagavadGitaChaptersComponent implements OnInit {
   title = 'This is the Bhagavad Gita Chapters Component';
   chapters: Observable<Chapter[]>;
-  showSpinner: boolean = true;
-  isActive: boolean = false;
+  showSpinner = true;
+  isActive = false;
   constructor(
     private bgService: BhagavadGitaService,
     private router: Router,
@@ -34,7 +34,7 @@ export class BhagavadGitaChaptersComponent implements OnInit {
         this.chapters = of(data);
       },
       error => {
-        if (error.status == 401) {
+        if (error.status === 401) {
           this.tokenService.obtainAccessToken().subscribe((data: any) => {
             this.tokenService.deleteToken();
             this.tokenService.saveToken(data.access_token);
@@ -53,7 +53,7 @@ export class BhagavadGitaChaptersComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Check Token
+    // Check Token
     this.getChapters();
   }
 }
