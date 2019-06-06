@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -13,6 +17,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainComponent } from './main/main.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,10 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+    AuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -31,7 +40,9 @@ import { environment } from '../environments/environment';
       preventDuplicates: true
     }),
     DeviceDetectorModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

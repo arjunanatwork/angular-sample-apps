@@ -1,5 +1,17 @@
-<div class="columns">
-  <div class="column is-full">
-	    <router-outlet></router-outlet>
+<app-header></app-header>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-fifth is-hidden-touch">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="column">
+        <div class="columns">
+          <div class="column is-full">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>

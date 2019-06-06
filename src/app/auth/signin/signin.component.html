@@ -1,0 +1,45 @@
+<div class="columns is-vcentered">
+  <div class="login column is-4 ">
+    <section class="section">
+      <div class="has-text-centered">
+        <img class="login-logo" src="assets/images/noimage.png" />
+      </div>
+
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-right">
+          <input class="input" type="text" />
+          <span class="icon is-small is-right">
+            <i class="fa fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control has-icons-right">
+          <input class="input" type="password" />
+          <span class="icon is-small is-right">
+            <i class="fa fa-key"></i>
+          </span>
+        </div>
+      </div>
+      <div class="has-text-centered">
+        <a class="button is-normal is-link">Login</a>
+      </div>
+      <div class="has-text-centered">
+        <a [routerLink]="['/signup']">
+          Don't you have an account? Sign up now!</a
+        >
+      </div>
+    </section>
+  </div>
+  <div class="interactive-bg">
+    <particles
+      [style]="myStyle"
+      [width]="width"
+      [height]="height"
+      [params]="myParams"
+    ></particles>
+  </div>
+</div>
