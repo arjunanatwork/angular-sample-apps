@@ -6,15 +6,16 @@ import {
   UrlTree,
   Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import { AuthService } from './auth.service';
 import { take, map, tap } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AngularFireAuth, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,15 +25,15 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.auth.user.pipe(
-      take(1),
-      map(user => !!user),
-      tap(loggedIn => {
-        if (!loggedIn) {
-          console.log('Access Denied');
-          this.router.navigate(['/signin']);
-        }
-      })
-    );
+      return Observable.from(this.auth.authState).pipe(
+        take(1),
+        map(state => !!state),
+        tap(authenticated => {
+          if(!authenticated){
+            this.router.navigate(['/signin']);
+          }
+        })
+      )
   }
 }
+ 

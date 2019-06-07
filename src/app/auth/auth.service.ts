@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-
+import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AngularFireAuth } from '@angular/fire/auth';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from '@angular/fire/firestore';
-import { auth } from 'firebase';
 
-interface User {
-  uid: string;
-  email: string;
-  password: string;
-  photoURL?: string;
-  displayName?: string;
-  favoriteColor?: string;
+
+export class User {
+    uid: string;
+    email: string;
+    password?: string;
+    photoURL?: string;
+    displayName?: string;
+    favoriteColor?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
   user: Observable<User>;
 
   constructor(
@@ -44,10 +42,23 @@ export class AuthService {
   emailSignUp(credentials: User) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then(() => console.log('success'));
+      .then((authState) => {
+        console.log('Email Sign Up');
+        this.updateUserData(authState.user);
+        this.router.navigate(['/signin']);
+      });
   }
 
-  // Google Login
+  // Email Sign In
+  emailSignIn(credentials: User) {
+    return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
+    .then((authState) => {
+      console.log('Email Login Success');
+      this.router.navigate(['/trello-clone']);
+    });
+  }
+
+ // Google Login
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
@@ -56,7 +67,7 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
       this.updateUserData(credential.user);
-    });
+   });
   }
 
   private updateUserData(user) {
@@ -69,7 +80,6 @@ export class AuthService {
     const data: User = {
       uid: user.uid,
       email: user.email,
-      password: user.password,
       displayName: user.displayName,
       photoURL: user.photoURL
     };
