@@ -3,13 +3,13 @@
     <div class="login column is-4 ">
       <section class="section">
         <div class="has-text-centered">
-          <img class="login-logo" src="assets/images/noimage.png" />
+          <img class="login-logo" src="assets/images/app-logo.png" />
         </div>
 
         <div class="field">
           <label class="label">Email</label>
           <div class="control has-icons-right">
-            <input class="input" type="text" formControlName="email"/>
+            <input class="input" type="text" formControlName="email" />
             <span class="icon is-small is-right">
               <i class="fa fa-user"></i>
             </span>
@@ -22,7 +22,7 @@
         <div class="field">
           <label class="label">Password</label>
           <div class="control has-icons-right">
-            <input class="input" type="password" formControlName="password"/>
+            <input class="input" type="password" formControlName="password" />
             <span class="icon is-small is-right">
               <i class="fa fa-key"></i>
             </span>
@@ -31,14 +31,38 @@
             {{ formErrors.password }}
           </p>
         </div>
-        
-        <div class="has-text-centered">
-          <button type="submit" class="button is-normal is-link" [disabled]="!userForm.valid">Login</button>
+
+        <div class="has-text-centered" style="margin: 25px 0px;">
+          <button
+            type="submit"
+            class="button is-normal is-link"
+            [disabled]="!userForm.valid"
+          >
+            Login
+          </button>
         </div>
-        <div class="has-text-centered">
+        <div class="has-text-centered" style="margin: 15px 0px;">
           <a [routerLink]="['/signup']">
             Don't you have an account? Sign up now!</a
           >
+        </div>
+        <div class="is-divider" data-content="OR"></div>
+        <div class="columns is-mobile" style="justify-content: center">
+          <div class="column" style="margin: 0px 10px;text-align: center">
+            <a class="button is-medium is-github" (click)="githubSignIn()">
+              <span class="fab fa-github"></span>
+            </a>
+          </div>
+          <div class="column" style="margin: 0px 10px;text-align: center">
+            <a class="button is-medium is-google" (click)="googleSignIn()">
+              <span class="fab fa-google"></span>
+            </a>
+          </div>
+          <div class="column" style="margin: 0px 10px;text-align: center">
+              <a class="button is-medium is-twitter">
+                <span class="fab fa-twitter"></span>
+              </a>
+            </div>
         </div>
       </section>
     </div>

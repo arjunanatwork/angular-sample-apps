@@ -44,6 +44,14 @@ export class SigninComponent implements OnInit {
     this.auth.emailSignIn(user);
   }
 
+  googleSignIn() {
+    this.auth.googleLogin();
+  }
+
+  githubSignIn() {
+    this.auth.githubLogin();
+  }
+
   buildForm(): void {
     this.userForm = this.fb.group({
       'email': ['', [

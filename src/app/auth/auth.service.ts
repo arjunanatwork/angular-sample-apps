@@ -64,9 +64,16 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  // Github Login
+  githubLogin() {
+    const provider = new auth.GithubAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
       this.updateUserData(credential.user);
+      this.router.navigate(['/trello-clone']);
    });
   }
 
@@ -89,7 +96,7 @@ export class AuthService {
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/signin']);
     });
   }
 }

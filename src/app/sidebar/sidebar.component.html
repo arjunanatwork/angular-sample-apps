@@ -6,4 +6,8 @@
     <li><a [routerLink]="['/pokedex']" routerLinkActive="is-active">Pokédex</a></li>
     <li><a [routerLink]="['/bhagavadgita']" routerLinkActive="is-active">Bhagavad Gita</a></li>
   </ul>
+  <p class="menu-label">Settings</p>
+  <ul class="menu-list">
+    <li><a (click)="signOut()">Logout</a></li>
+  </ul>
 </aside>

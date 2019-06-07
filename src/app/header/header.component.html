@@ -15,18 +15,35 @@
 
   <div id="navbarBasicExample" class="navbar-menu is-hidden-desktop" [ngClass]="{'is-active': toggleMenu}">
     <div class="navbar-start">
-      <a class="navbar-item" [routerLink]="['/trello-clone']" routerLinkActive="is-active" (click)="toggleMenu=false">
-        Trello Clone
-      </a>
-      <a class="navbar-item" [routerLink]="['/hackernews']" routerLinkActive="is-active" (click)="toggleMenu=false">
-        HackerNews Clone
-      </a>
-      <a class="navbar-item" [routerLink]="['/pokedex']" routerLinkActive="is-active" (click)="toggleMenu=false">
-        Pokédex
-      </a>
-      <a class="navbar-item" [routerLink]="['/bhagavadgita']" routerLinkActive="is-active" (click)="toggleMenu=false">
-        BhagavadGita
-      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Apps
+          </a>
+          <div class="navbar-dropdown">
+              <a class="navbar-item" [routerLink]="['/trello-clone']" routerLinkActive="is-active" (click)="toggleMenu=false">
+                Trello Clone
+              </a>
+              <a class="navbar-item" [routerLink]="['/hackernews']" routerLinkActive="is-active" (click)="toggleMenu=false">
+                HackerNews Clone
+              </a>
+              <a class="navbar-item" [routerLink]="['/pokedex']" routerLinkActive="is-active" (click)="toggleMenu=false">
+                Pokédex
+              </a>
+              <a class="navbar-item" [routerLink]="['/bhagavadgita']" routerLinkActive="is-active" (click)="toggleMenu=false">
+                BhagavadGita
+              </a>
+          </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Settings
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" (click)="signOut()">
+              Logout
+            </a>
+          </div>
+      </div>
     </div>
   </div>
 </nav>

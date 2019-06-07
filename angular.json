@@ -25,6 +25,8 @@
             "styles": [
               "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/bulma/css/bulma.css",
+              "node_modules/bulma-divider/dist/css/bulma-divider.min.css",
+              "src/assets/css/bulma-social.min.css",
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
