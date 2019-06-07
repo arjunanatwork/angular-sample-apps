@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 
 export class User {
@@ -24,7 +25,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     //// Get auth data, then get firestore user document || null
     this.user = this.afAuth.authState.pipe(
@@ -45,7 +47,17 @@ export class AuthService {
       .then((authState) => {
         console.log('Email Sign Up');
         this.updateUserData(authState.user);
+        this.toastr.success('Sign-up successful. Please login with your crendentials', '', {
+          timeOut: 4000,
+          toastClass: 'toast has-background-success'
+        });
         this.router.navigate(['/signin']);
+      })
+      .catch((error) => {
+        this.toastr.error(error.message, '', {
+          timeOut: 4000,
+          toastClass: 'toast has-background-danger'
+        });
       });
   }
 
@@ -55,6 +67,12 @@ export class AuthService {
     .then((authState) => {
       console.log('Email Login Success');
       this.router.navigate(['/trello-clone']);
+    })
+    .catch((error) => {
+      this.toastr.error(error.message, '', {
+        timeOut: 4000,
+        toastClass: 'toast has-background-danger'
+      });
     });
   }
 
@@ -67,6 +85,12 @@ export class AuthService {
   // Github Login
   githubLogin() {
     const provider = new auth.GithubAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
+  // Twitter Login
+  twitterLogin() {
+    const provider = new auth.TwitterAuthProvider();
     return this.oAuthLogin(provider);
   }
 

@@ -92,18 +92,8 @@ export class SignupComponent implements OnInit {
 
 
   ngOnInit() {
-    this.myStyle = {
-      height: '100vh',
-      'background-color': '#3273dc',
-      '-webkit-box-shadow': 'inset 24px 4px 64px -24px rgba(71, 71, 71, 1)',
-      '-moz-box-shadow': 'inset 24px 4px 64px -24px rgba(71, 71, 71, 1)',
-      'box-shadow': 'inset 24px 4px 64px -24px rgba(71, 71, 71, 1)',
-      padding: '0px'
-    };
-
+    this.myStyle = particle.partCss;
     this.myParams = particle.partJson;
-
     this.buildForm();
-
   }
 }
