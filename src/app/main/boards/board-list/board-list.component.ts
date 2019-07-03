@@ -35,14 +35,14 @@ export class BoardListComponent implements OnInit {
     this.boardList.push(board);
     this.boardListService.saveBoard(board);
     this.toastr.success('Board ' + board.name + ' has been created', '', {
-      toastClass: 'toast has-background-success	'
+      toastClass: 'ngx-toastr has-background-success	'
     });
   }
 
   deleteBoard(boardId: number) {
     this.boardListService.deleteBoard(boardId);
     this.toastr.info('Board has been deleted', '', {
-      toastClass: 'toast has-background-info'
+      toastClass: 'ngx-toastr has-background-info'
     });
     this.getBoardData();
   }

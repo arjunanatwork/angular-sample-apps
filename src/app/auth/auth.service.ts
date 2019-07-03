@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { auth } from 'firebase';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
-
 export class User {
-    uid: string;
-    email: string;
-    password?: string;
-    photoURL?: string;
-    displayName?: string;
-    favoriteColor?: string;
+  uid: string;
+  email: string;
+  password?: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
   user: Observable<User>;
 
   constructor(
@@ -44,39 +45,44 @@ export class AuthService {
   emailSignUp(credentials: User) {
     return this.afAuth.auth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
-      .then((authState) => {
+      .then(authState => {
         console.log('Email Sign Up');
         this.updateUserData(authState.user);
-        this.toastr.success('Sign-up successful. Please login with your crendentials', '', {
-          timeOut: 4000,
-          toastClass: 'toast has-background-success'
-        });
+        this.toastr.success(
+          'Sign-up successful. Please login with your crendentials',
+          '',
+          {
+            timeOut: 4000,
+            toastClass: 'ngx-toastr has-background-success'
+          }
+        );
         this.router.navigate(['/signin']);
       })
-      .catch((error) => {
+      .catch(error => {
         this.toastr.error(error.message, '', {
           timeOut: 4000,
-          toastClass: 'toast has-background-danger'
+          toastClass: 'ngx-toastr has-background-danger'
         });
       });
   }
 
   // Email Sign In
   emailSignIn(credentials: User) {
-    return this.afAuth.auth.signInWithEmailAndPassword(credentials.email, credentials.password)
-    .then((authState) => {
-      console.log('Email Login Success');
-      this.router.navigate(['/trello-clone']);
-    })
-    .catch((error) => {
-      this.toastr.error(error.message, '', {
-        timeOut: 4000,
-        toastClass: 'toast has-background-danger'
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .then(authState => {
+        console.log('Email Login Success');
+        this.router.navigate(['/trello-clone']);
+      })
+      .catch(error => {
+        this.toastr.error(error.message, '', {
+          timeOut: 4000,
+          toastClass: 'ngx-toastr has-background-danger'
+        });
       });
-    });
   }
 
- // Google Login
+  // Google Login
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
@@ -98,7 +104,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider).then(credential => {
       this.updateUserData(credential.user);
       this.router.navigate(['/trello-clone']);
-   });
+    });
   }
 
   private updateUserData(user) {

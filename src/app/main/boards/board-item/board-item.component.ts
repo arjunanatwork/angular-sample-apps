@@ -49,7 +49,7 @@ export class BoardItemComponent implements OnInit {
     this.board.list.push(list);
     this.boardItemService.saveBoard(this.board);
     this.toastr.success('List ' + list.name + ' has been created', '', {
-      toastClass: 'toast has-background-success	'
+      toastClass: 'ngx-toastr has-background-success	'
     });
   }
 
@@ -59,7 +59,7 @@ export class BoardItemComponent implements OnInit {
     this.board.list.find(x => x.id == listId).cards.push(card);
     this.boardItemService.saveBoard(this.board);
     this.toastr.success('Card ' + card.name + ' has been created', '', {
-      toastClass: 'toast has-background-success	'
+      toastClass: 'ngx-toastr has-background-success	'
     });
   }
 
@@ -71,7 +71,7 @@ export class BoardItemComponent implements OnInit {
     this.boardItemService.saveBoard(this.board);
     if (isCompleted) {
       this.toastr.info('Card has been marked as completed', '', {
-        toastClass: 'toast has-background-info'
+        toastClass: 'ngx-toastr has-background-info'
       });
     }
   }
@@ -81,7 +81,7 @@ export class BoardItemComponent implements OnInit {
     this.board.list.splice(listIndex, 1);
     this.boardItemService.saveBoard(this.board);
     this.toastr.info('List has been deleted', '', {
-      toastClass: 'toast has-background-info'
+      toastClass: 'ngx-toastr has-background-info'
     });
   }
 
@@ -90,7 +90,7 @@ export class BoardItemComponent implements OnInit {
     this.board.list.find(x => x.id === listId).cards.splice(cardIndex, 1);
     this.boardItemService.saveBoard(this.board);
     this.toastr.info('Card has been deleted', '', {
-      toastClass: 'toast has-background-info'
+      toastClass: 'ngx-toastr has-background-info'
     });
   }
 
